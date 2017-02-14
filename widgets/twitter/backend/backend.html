@@ -1,0 +1,43 @@
+<html>
+<head>
+<style>
+.tw-feed {width:450px;color:#fff;background: #555;padding:10px;border: solid 5px #555; border-radius:10px;}
+.tw-feed a {color:#fff;text-decoration:none;}
+.tw-feed a:hover {color:#ccc;text-decoration:none;}
+.twitter-timeline {position:relative;}\
+</style>
+<script>
+window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+}(document, "script", "twitter-wjs"));
+
+twttr.ready(function (twttr) {
+    twttr.widgets.load();
+    setInterval(function() {
+        twttr.widgets.load();
+        console.log("update twitter timeline");
+    }, 100);
+});
+</script>
+</head>
+<body >
+<div class="tw-feed">  
+   <a class="twitter-timeline" href="https://twitter.com/ChampForensics"
+   data-theme="dark"
+   data-link-color="#ccc"
+   background="#1b3b5f"
+   border-radius="none"
+   data-chrome="nofooter noborders"
+   data-screen-name="ChampForensics" data-show-replies="false"
+   data-tweet-limit="5"
+   >
+   Tweets by ChampForensics</a> 
+   <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+</body>
+</html>
+          
