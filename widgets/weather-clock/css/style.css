@@ -101,11 +101,17 @@ h2, h4 {
 }
 
 #shuttle {
-	border: none;
-	/* margin-top: 5%; */
+	/*border: none;
+	margin-top: 5%; 
 	height: 500px;
 	width: 100%;
-	margin: 1%;
+	margin: 1%; */
+	width: 1041px;
+	height: 809px;
+	left: 38px;
+	top: 151px;
+	z-index: 13;
+	position: absolute;
 }
 
 footer {

@@ -5,7 +5,9 @@
 <head>
 	<title>Prize Vision</title>
 	<meta charset="utf-8"/>
+	<!-- <meta http-equiv="content-type" content="text/html; charset=UTF-8"> -->
 	<link rel="stylesheet" href="css/style.css">
+	<!-- <link rel="stylesheet" href="css/shuttlestyle.css"> -->
 	<script>
 	<!--def function startTime(), which gets the time in hours, minutes -->
 	<!--	and seconds and then starts the clock real-time -->
@@ -205,11 +207,64 @@
 			<!-- <iframe src="../LCDITwitterWidgets/backend/backend.html" style="width: 300px; height: 525px" name="internal"></iframe> -->
 		<!-- </div> -->
 		<div id = "embed">
-			<div id="shuttle">
-				<script src="js/shuttle.js"></script>
-				<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCrA-veFj5i6Ox7pdFBuPlCBDI3OFXTtz8&callback=initMap">
-				</script>
+			<div id="shuttle" placeholder="true">
+				<!-- <iframe style="visibility: hidden, z-index: 0;"> -->
+					<!-- #document -->
+					<!-- <html> -->
+						<!-- <head> </head> -->
+						<!-- <body> </body> -->
+					<!-- </html> -->
+				<!-- </iframe> -->
+				<!-- <script src="js/shuttle.js"></script> -->
+				<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCrA-veFj5i6Ox7pdFBuPlCBDI3OFXTtz8&callback=initMap"> -->
+				<!-- </script> -->
 			</div>
+			<script language="javascript">
+				var presentationData = {
+					{
+					"id": "Shuttle",
+					"type": "playlist",
+					"timeDefined": true,
+					"startDate": "09/17/15 12:00 AM",
+					"endDate": null,
+					"startTime": "09/17/15 4:00 PM",
+					"endTime": "09/17/15 8:00 PM",
+					"recurrenceType": "Daily",
+					"recurrenceFrequency": "1",
+					"recurrenceAbsolute": true,
+					"recurrenceDayOfWeek": "0",
+					"recurrenceDayOfMonth": "1",
+					"recurrenceWeekOfMonth": "0",
+					"recurrenceMonthOfYear": "0",
+					"visibility": false,
+					"transition": "none",
+					"items": [
+						{
+							"name": "Web Page Widget ",
+							"duration": "10",
+							"type": "widget",
+							"objectReference": "43034ed5-12e4-406b-872c-07d7736879bb",
+							"index": null,
+							"playUntilDone": false,
+							"objectData": "http://s3.amazonaws.com/widget-web-page/0.1.2/dist/widget.html",
+							"additionalParams": "{\"url\":\"https://dl.dropboxusercontent.com/u/66798396/LCDI/shuttle.html\",\"scrollHorizontal\":0,\"scrollVertical\":0,\"zoom\":1,\"interactive\":true,\"scrollbars\":false,\"refresh\":0,\"background\":{\"color\":\"rgba(255,255,255,0)\",\"useImage\":false,\"image\":{\"url\":\"\",\"position\":\"top-left\",\"scale\":true}},\"backgroundStorage\":{}}",
+							"timeDefined": false,
+							"startDate": null,
+							"endDate": null,
+							"startTime": null,
+							"endTime": null,
+							"recurrenceType": "Daily",
+							"recurrenceFrequency": "1",
+							"recurrenceAbsolute": true,
+							"recurrenceDayOfWeek": "0",
+							"recurrenceDayOfMonth": "1",
+							"recurrenceWeekOfMonth": "0",
+							"recurrenceMonthOfYear": "0"
+						}
+					]
+					}
+				}
+			</script>
 		</div>
 	</main>
 	<footer>
