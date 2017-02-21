@@ -1,9 +1,0 @@
-.chart iframe {
-    border: 0;
-    width: 800px;
-    height: 8000px;
-    position: relative;
-    left: 100px;
-    padding:20px;
-    overflow: hidden;   
-}
