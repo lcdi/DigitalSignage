@@ -3,12 +3,20 @@
         <title> LCDI Project Hours Table </title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="ProjectHours2.css">
-        <script type="text/javascript" src="ProjectHours2.js"> </script>
         <script src="jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="ProjectHours2.js"></script>
     </head>
 
-    <body onload="loadContent()">
-        <div id="tableDiv"> </div>
-        <button type="button"> Refresh </button>
+    <body>
+        <div id="tableDiv">
+            <table id="dataTable">
+                <thead>
+                    <tr id="header">
+                        <th> Project Name </th>
+                        <th> Hours Worked </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </body>
 </html>
