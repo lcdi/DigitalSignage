@@ -1,33 +1,32 @@
-function makeTable(){
+$(function loadContent() {
+    var data =
+    {
+    "content": ["Application Analysis", "Artifact Analysis", "Bluetooth Forensics",  "Data Breach Analysis", "IoT Forensics", "Malware Analysis", "Micro Computers", "Mobile App Forensics", "Network Defense", "Tool Evaluation", "Total Hours"],
+    "name": ["Application_Analysis", "Artifact_Analysis", "Bluetooth_Forensics",  "Data_Breach_Analysis", "IoT_Forensics", "Malware_Analysis", "Micro_Computers", "Mobile_App_Forensics", "Network_Defense", "Tool_Evaluation", "TotalHours"],
+    "hours": [59, 94, 115, 32, 143, 93, 44, 72, 64, 81, 797]
+    };
 
-    $.ajax({
-    [{"projectName":"Application Analysis","Hours":59},
-    {"projectName":"Artifact Analysis","Hours":94},
-    {"projectName":"Bluetooth Forensics","Hours":115},
-    {"projectName":"Data Breach Analysis","Hours":32},
-    {"projectName":"IoT Forensics","Hours":143},
-    {"projectName":"Malware Analysis","Hours":93},
-    {"projectName":"Micro Computers","Hours":44},
-    {"projectName":"Mobile App Forensics","Hours":72},
-    {"projectName":"Network Defense","Hours":64},
-    {"projectName":"Tool Evaluation","Hours":81},
-    {"projectName":"Total Hours","Hours":797}]
-    data = $.parseJSON(data);
- });
-    var body = $("body");
-    var table = $("<table></table>");
     for (var i = 0; i < 11; i++)
     {
-        var tr = $("<tr></tr>"); 
-        var td1 = $("td id='data.projectName[i]></td>");
-        var td2 = $("td id='data.Hours[i]></td>");
-
-        for (var j = 0; j < 2; j++)
+        var tr = $('<tr>');
+        var td1 = $('<td id="' + data.name[i] + '">');
+        var td2 = $('<td id="' + data.name[i] + '_Hours">');
+        tr.append(
+        td1.text(data.content[i]),
+        td2.text(data.hours[i])).appendTo('thead');
+        if (i % 2 == 0)
         {
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        table.appendChild(tr);
+            tr.addClass("evenStyling");
+        }
+        else {
+            tr.addClass("oddStyling");
         }
     }
-    document.body.appendChild(table);
-}
+
+    if (tr.length > 11)
+    {
+        return false;
+        console.log("Too many table rows.");
+    }
+
+});
