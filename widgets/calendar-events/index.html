@@ -1,11 +1,65 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCDI Digital Signage</title>
-  </head>
-  <body>
-
-  </body>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
+<script src="jquery.gcal_flow.js"></script>
+<link rel="stylesheet" href="jquery.gcal_flow.css">
+</head>
+<body>
+    <style type="text/css">
+      #gcf-design {
+        height: 800px;
+        width: 600px;
+        background: none;
+        filter: none;
+      }
+      #gcf-design .gcf-header-block {
+        background: green;
+        filter:none;
+      }
+      #gcf-design .gcf-item-daterange{
+        font-size: 12pt;
+      }
+      #gcf-design .gcf-item-location{
+        font-size: 10pt;
+      }
+    </style>
+    <div id="gcf-design">
+        <div class="gcf-header-block">
+  <div class="gcf-title-block"> Upcoming Events:
+    <!--<span class="gcf-title"></span>-->
+  </div>
+</div>
+<div class="gcf-item-container-block">
+  <div class="gcf-item-block">
+    <div class="gcf-item-header-block">
+      <div class="gcf-item-date-block">
+        <span class="gcf-item-daterange"></span>
+      </div>
+      <div class="gcf-item-title-block">
+        <strong class="gcf-item-title"></strong>
+      </div>
+    </div>
+    <div class="gcf-item-body-block">
+      <div class="gcf-item-description">
+      </div>
+      <div class="gcf-item-location">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gcf-last-update-block">
+  LastUpdate: <span class="gcf-last-update"></span>
+</div>
+    </div>
+    <script type="text/javascript">
+      $('#gcf-design').gCalFlow({
+        calid: 'champforensics@gmail.com',
+        maxitem: 25,
+        link_title: false,
+        link_item_title: false,
+        globalize_fmt_datetime: "F",
+      });
+    </script>
+</body>
 </html>
