@@ -3,7 +3,9 @@
 <head>
 	<title>LCDI Digital Signage</title>
 	<meta charset="utf-8"/>
+	<meta name="viewport" content="width-device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src = "js/slideshow.js"> </script>
 	<script>
 	<!--def function startTime(), which gets the time in hours, minutes -->
 	<!--	and seconds and then starts the clock real-time -->
@@ -46,10 +48,10 @@
 		}
 	</script>
 </head>
-<body>
+<body onLoad="switchImage('slide')">
 	<nav>
 		<div id="header">
-			<img id = "lcdibanner" src="new_lcdi.png" alt="lcdi icon"/>
+			<img id = "lcdibanner" src="images/new_lcdi.png" alt="lcdi icon"/>
 			<div id="right">
 				<!--Weather widget, provided by weather underground -->
 				<div id="weather">
@@ -66,7 +68,7 @@
 					</div>
 					<div id="time">
 						<script>
-						startTime();
+							startTime();
 						</script>
 					</div>
 				</div>
@@ -74,10 +76,14 @@
 		</div>
 	</nav>
 	<main>
-	
+		<div id = "container">
+			<div id = "slideShow">
+				<img src="images/img2.jpeg" alt="img" name = "slide" id="slides">
+			</div>
+		</div>
 	</main>
 	<footer>
-		<p>LCDI 2017</p>
+		
 	</footer>
 </body>
 </html>
