@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LCDI Digital Signage</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="style.css">
+	<script>
+	<!--def function startTime(), which gets the time in hours, minutes -->
+	<!--	and seconds and then starts the clock real-time -->
+		function startTime() {
+			var date = new Date();
+			var hours = date.getHours();
+			var period = "AM";
+			var minutes = date.getMinutes();
+			var seconds = date.getSeconds();
+			
+			//convert to regular time (instead of military time)
+			if (hours > 12) {
+				hours = hours - 12;
+				period = "PM";
+			}
+			else {
+				period = "AM";
+			} 
+			
+			//put zero's in front of minutes and seconds when less than ten
+			if(minutes < 10) {
+				minutes = "0" + minutes;
+			}
+			if(seconds < 10) {
+				seconds = "0" + seconds;
+			}
+			
+			//display clock INCLUDING seconds, just for testing
+			/*document.getElementById("time").innerHTML = hours + ":" 
+				+ minutes + ":" + seconds +" " + period; */
+			
+			//display clock WITHOUT seconds
+			//(do not have both with and without seconds!)
+			//(one should be commented out.)
+			document.getElementById("time").innerHTML = hours + ":"
+				+ minutes + " " + period;
+			
+			//start clock
+			var clock = setTimeout(startTime, 500);
+		}
+	</script>
+</head>
+<body>
+	<nav>
+		<div id="header">
+			<img id = "lcdibanner" src="new_lcdi.png" alt="lcdi icon"/>
+			<div id="right">
+				<!--Weather widget, provided by weather underground -->
+				<div id="weather">
+					<span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;"><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:05401.1.99999&bannertypeclick=wu_clean2day" title="Burlington, Vermont Weather Forecast" target="_blank">
+					<img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&airportcode=KBTV&ForcedCity=Burlington&ForcedState=VT&zip=05401&language=EN" alt="Find more about Weather in Burlington, VT" width="300" /></a>	
+				</div>
+				<div id="clock">
+				<!-- Clock: date and time. time calls function startTime() above -->
+					<div id="date">
+						<script>
+						var date = new Date();
+						document.getElementById("date").innerHTML = date.toDateString();
+						</script>
+					</div>
+					<div id="time">
+						<script>
+						startTime();
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<main>
+	
+	</main>
+	<footer>
+		<p>LCDI 2017</p>
+	</footer>
+</body>
+</html>
