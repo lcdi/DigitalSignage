@@ -5,10 +5,14 @@
 <head>
 	<title>LCDI Digital Signage</title>
 	<meta charset="utf-8"/>
-	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
+  <script src="common/calendar.js"></script>
+	<link rel="stylesheet" href="common/main.css">
+	<link rel="stylesheet" href="common/rss.css">
   <script>
-	//def function startTime(), which gets the time in hours, minutes -->
-	//and seconds and then starts the clock real-time -->
+	//def function startTime(), which gets the time in hours, minutes
+	//and seconds and then starts the clock real-time
 		function startTime() {
 			var date = new Date();
 			var hours = date.getHours();
@@ -51,7 +55,7 @@
 <body>
 	<nav>
 		<div id="header">
-			<img id = "lcdibanner" src="images/lcdi.png" alt="lcdi icon"/>
+			<img id = "lcdibanner" src="common/lcdi.png" alt="lcdi icon"/>
 			<div id="right">
 				<!--Weather widget, provided by weather underground -->
 				<div id="weather">
@@ -149,19 +153,19 @@
 					var student3 = new Image();
 					var student4 = new Image();
 					var student5 = new Image();
-					student1.src = "images/Abagail.JPG";
+					student1.src = "common/Abagail.JPG";
 					var name1 = "Abbey Barr";
-					student2.src = "images/Meghan.JPG";
+					student2.src = "common/Meghan.JPG";
 					var name2 = "Meghan Richards";
-					student3.src = "images/MichaelC.JPG";
+					student3.src = "common/MichaelC.JPG";
 					var name3 = "Michael Cook";
-					student4.src = "images/Saleban.JPG";
+					student4.src = "common/Saleban.JPG";
 					var name4 = "Saleban Olow";
-					student5.src = "images/TylerNett.JPG";
+					student5.src = "common/TylerNett.JPG";
 					var name5 = "Tyler Nettleton";
 				</script>
 				<h4 id="name"><h4>
-				<img src="images/Abagail.jpg" alt="student pic" id="studentPic">
+				<img src="common/Abagail.jpg" alt="student pic" id="studentPic">
 				<script>
 					var step = 0;
 					var pic;
@@ -200,6 +204,80 @@
 			</div>
 		</div>
 	</main>
+	<div>
+	<style type="text/css">
+	#fw-container{
+		left:1259px;
+		top:604px;
+	}
+	</style>
+	<!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="10332/"></script> <!-- end feedwind code -->
+	</div>
+
+
+
+  <style type="text/css">
+    #gcf-design {
+      height: 370px;
+      width: 576px;
+      position: absolute;
+      top: 614px;
+      left: 57px;
+      background: none;
+      filter: none;
+    }
+    #gcf-design .gcf-header-block {
+      background: green;
+      filter:none;
+    }
+    #gcf-design .gcf-item-daterange{
+      font-size: 12pt;
+			color: white;
+    }
+    #gcf-design .gcf-item-location{
+      font-size: 10pt;
+    }
+		#gcf-design .gcf-item-title{
+			color: white;
+		}
+  </style>
+  <div id="gcf-design">
+      <div class="gcf-header-block">
+<div class="gcf-title-block"> Upcoming Events:
+  <!--<span class="gcf-title"></span>-->
+</div>
+</div>
+<div class="gcf-item-container-block">
+<div class="gcf-item-block">
+  <div class="gcf-item-header-block">
+    <div class="gcf-item-date-block">
+      <span class="gcf-item-daterange"></span>
+    </div>
+    <div class="gcf-item-title-block">
+      <strong class="gcf-item-title"></strong>
+    </div>
+  </div>
+  <div class="gcf-item-body-block">
+    <div class="gcf-item-description">
+    </div>
+    <div class="gcf-item-location">
+    </div>
+  </div>
+</div>
+</div>
+<div class="gcf-last-update-block">
+LastUpdate: <span class="gcf-last-update"></span>
+</div>
+  </div>
+  <script type="text/javascript">
+    $('#gcf-design').gCalFlow({
+      calid: 'champforensics@gmail.com',
+      maxitem: 25,
+      link_title: false,
+      link_item_title: false,
+      globalize_fmt_datetime: "F",
+    });
+  </script>
 	<footer>
 	<!-- Prize vision: keep your eyes on the prize~ (get it? like rise vision?) -->
 		<p>LCDI 2017</p>

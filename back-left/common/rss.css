@@ -1,0 +1,148 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+
+#fw-container {
+ text-align: left;
+ padding: 10px;
+ font-family: 'Noto Sans', Helvetica, sans-serif;
+ border: 1px solid #0E4FAE;
+ border-radius: 4px;
+ box-sizing: border-box;
+ background-color:#4e82d0;
+}
+
+#header {
+ margin: 10px 20px 10px 20px;
+ color: #fff;
+ font-size: 18px;
+ background-color: #888;
+ background-image: url("http://glassho.me/fwtest/bannertop.png");
+ background-repeat: repeat-x;
+}
+
+a.fw-feed-item-url {
+ text-decoration: none;
+}
+
+.fw-feed-item {
+ display:block;
+}
+
+.fw-feed-title {
+ margin: 10px 20px 10px 20px;
+ font-weight: bold;
+ word-wrap: break-word;
+ text-align: center;
+ text-shadow: 2px 1px 0px #000080;
+ display:block;
+}
+
+.fw-feed-title a:link {
+ color: #fef;
+ text-decoration: none;
+}
+
+.fw-feed-title a:visited {
+ color: #ddd;
+ text-decoration: none;
+}
+
+.fw-feed-title a:hover {
+ color: #fff;
+ text-decoration: none;
+}
+
+.fw-feed-title a:active {
+ color: #fff;
+ text-decoration: none;
+}
+
+.fw-feed-item-content-module {
+ margin: 10px;
+ height: 160px;
+ padding: 10px;
+ border-bottom: 1px solid #bbceeb;
+ box-shadow: 0px 1px 1px #222;
+ background-color: #d1e3ff;
+
+}
+
+.fw-feed-item-title {
+ display:block;
+}
+
+.fw-feed-item-title a:link{
+ margin: 20px 0 10px 0px!important;
+ color: #00aeff;
+ text-decoration: none;
+ font-size: 16px;
+}
+
+.fw-feed-item-title a:visited{
+ color: #39f;
+ padding: 20px 0 0 0;
+ text-decoration: none;
+}
+
+.fw-feed-item-title a:hover{
+ color: #39c;
+ text-decoration: none;
+ padding: 20px 0 0 0;
+}
+
+.fw-feed-item-title a:active{
+ color: #09f;
+ text-decoration: none;
+ padding: 20px 0 0 0;
+}
+
+.fw-feed-item-date {
+ display:block;
+ margin: 0 20px 0 3px;
+ padding: 0 2px 0 3px;
+ color: #999;
+ font-size: 10px;
+ text-align: right;
+}
+
+.fw-feed-item-link {
+ margin: 0 0 0 3px;
+ padding: 0 2px 0 3px;
+ color: red;
+ text-decoration:none;
+ }
+
+.fw-feed-item-link a{
+ color: #123456;
+ text-decoration: none;
+}
+
+.fw-feed-item-link a:link{
+ color: #666666;
+ text-decoration: none;
+}
+
+.fw-feed-item-link a:visited{
+ color: #666666;
+ text-decoration: none;
+}
+
+.fw-feed-item-link a:hover{
+ color: #666666;
+ text-decoration: none;
+}
+
+.fw-feed-item-link a:active{
+ color: #666666;
+ text-decoration: none;
+}
+
+.fw-feed-item-description {
+ font-size: 12px;
+ text-align: left;
+ margin: 10px;
+ color: #666;
+ font-weight: 300;
+ word-wrap: break-word;
+ text-decoration:none;
+ display:block;
+}
