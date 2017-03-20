@@ -1,0 +1,32 @@
+body
+{
+	/*font-family: Verdana,sans-serif;*/
+}
+
+/*.myMessages
+{
+	display:none;
+}
+.slideshow-container
+{
+	max-width: 1000px;
+	position: relative;
+	margin: auto;
+}*/
+
+.myMessages
+{
+	font-family: Verdana,sans-serif;
+}
+
+#currentMessage
+{
+	background-color:gray;
+	font-size: 200%;
+	color: white;
+	padding: 100px;
+	width:50%;
+	text-align:center;
+	
+}
+
