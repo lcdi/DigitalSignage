@@ -19,7 +19,9 @@ nav {
 
 #header {
 	background-color: rgba(3, 3, 20, 0.3);
-	height: 125px;
+	height: 130px;
+    max-width: 100%;
+    position: static;
     /* border: 5px grey solid; */
 }
 
@@ -32,7 +34,7 @@ nav {
 	padding-left: 25px;
 	max-width: 60%;
 	max-height: 60%;
-	filter:brightness(110%);
+	filter: brightness(110%);
 	/* border: 3px red solid; */
 	
 	/*padding: 20px;
@@ -65,8 +67,42 @@ two day 300 x 100 */
     /*padding: 10px; unnecessary if there's padding on weather-clock */ 
     max-height: 100%;
     max-width: 100%;
+    letter-spacing: .75px;
     /* border: 3px red solid; */
 }
+
+
+#weather-app{
+    position: absolute;
+    left: 1450px;
+    font-family: 'Lora', serif;
+    color: rgb(255,255,255);
+    font-size: 15.3px;
+    width: 250px;
+    height: 83.8px;
+    justify-content: space-around;
+    letter-spacing: 1.25px;
+	color: white;
+}
+
+#weather-info{
+   display: flex;
+   flex-direction: column;
+   justify-content:flex-end;
+}
+
+#weather-icon img{
+    width: 100px;
+}
+
+#weather-condition{
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 12.2px;
+    text-transform: capitalize;
+    letter-spacing: inherit;
+}
+
 
 /* 4C) CLOCK*/
 
@@ -81,6 +117,7 @@ two day 300 x 100 */
     max-height:100%;
 	text-align: center;
 	width: 160px; 
+    font-weight: 400;
     /* border: 3px red solid; */
 }
 
@@ -88,16 +125,6 @@ two day 300 x 100 */
 
 #date {
     max-width: 100%;
-}
-
-/* 5A) WEATHER SPAN */
-
-#right #weather span {
-	background-color: #00264D;
-	display: inline;
-	width: 320px; 
-	text-align: center; 
-	font-family: sans-serif; 
-	font-size: 12px;
+    font-weight: 400;
 }
 

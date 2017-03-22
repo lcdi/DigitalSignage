@@ -1,20 +1,81 @@
+/* 1A) SLIDESHOW */
+#container{
+	/*width: 300px;
+	height: auto; */
+    position: absolute;
+    /* margin-top: 30px; moved to slides so it would apply to shuttle as well */
+    /* margin-bottom: 185px; This was causing the page to have a 
+	scroll bar on the side when the larger photos were displayed. 
+	I didn't see why it was necessary. If you want to add it back in, 
+	I would suggest just making it smaller. */
+    left: 3%;
+    /* border: 5px white solid; */
+}
+#slideShow{
+	height: 100%;
+	width: 99%;
+    /* border: 3px black solid; */
+} 
+.slides{
+	margin-top: 80px;
+	/* margin-top: auto; */
+	/* width: 500px; */
+	/* height: auto; */
+	max-width: 600px;
+	max-height: 9000px;
+	/*there isn't a huge difference between these two methods */
+    /* border: 5px red solid; */
+}
+.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div
+{
+	font-size:10px;
+}
+@media print {
+.gm-style .gmnoprint, .gmnoprint {
+  display:none
+}
+}
 
-/* 1A) TABLE GENERAL */
+@media screen {
+  .gm-style .gmnoscreen .gmnoscreen {
+	display:none
+	}
+}
+.gm-style {
+	font-family:Roboto,Arial,sans-serif;
+	font-size:11px;
+	font-weight:400;
+	text-decoration:none
+}
+.gm-style img{
+	max-width:none;
+}
+#map_canvas {
+	height: 600px;
+	width: 900px;
+	left: 710px;
+}
+
+
+/* 2A) TABLE GENERAL */
 main {
     /* border: 6px purple solid; */
 	display: flex;
 	padding-top: 20px;
+    overflow: hidden;
 }
 
 body
 {
+	height: 100%;
 	background-color: #083c70;
     font-family: 'Lora', serif;
     text-rendering: optimizePrecision;
+    overflow: hidden;
 	/* border: 10px solid darkgreen; */
 }
 
-/*PROJECT HOURS */
+/* 2B) PROJECT HOURS */
 table
 {
     /* border: 3px white solid; */
@@ -23,13 +84,16 @@ table
     column-rule: 1px solid black;
     /* height: 15%; */
     /* width: 35%; */
-    position: relative;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    margin-left: 100px;
+    position: absolute;
+    left: 71.97%;
+    top: 15.5%;
 }
 
-/* 1B) TABLE HEADER */
+#tableDiv {
+   
+}
+
+/* 2C) TABLE HEADER */
 #tableHeader {
     /* border: 5px white dotted; */
 }
@@ -40,22 +104,25 @@ th
     color:#D5DDE5;
     background-color: rgba(3, 3, 20, 0.5);
     border-right: 1px solid #343a45;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 100;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 5px;
     text-align: left;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     vertical-align: middle;
+    padding-left: 40px;
+    padding-right: 39px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
-/* 1C) TABLE BODY */
+/* 2D) TABLE BODY */
 
 tr
 {
     border-radius: 4.35px;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
@@ -63,15 +130,20 @@ tr
 
 td
 {
-    padding: 18px;
+    padding: 2px;
     text-align:left;
     vertical-align:middle;
     font-weight:300;
-    font-size:18px;
+    font-size:16px;
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+    letter-spacing: .75px;
+    padding-left: 49px;
+    padding-right: 48px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
-/* 1D) TABLE ALTERNATING STYLES */
+/* 2E) TABLE ALTERNATING STYLES */
 
 .oddStyling
 {
@@ -98,7 +170,7 @@ td
 .evenStyling, .oddStyling
 {
     font-family: 'Lora', serif;
-    font-size: 18px;
+    font-size: 16x;
     font-style: normal;
     font-variant: normal;
     font-weight: 350;
@@ -117,49 +189,21 @@ td
     /* border-radius: 1px #343A45 solid; */
 }
 
-/* 2A) SLIDESHOW */
-#container{
-	/*width: 300px;
-	height: auto; */
-	position: absolute;
-	margin-left: 1200px; 
-	margin-top: 20px;
-}
-#slideShow{
-	height: 90%;
-	width: 100%; 	
-} 
-#slides{
-	/* margin-top: auto; */
-	/* width: 500px; */
-	/* height: auto; */
-	max-width: 400px;
-	max-height: 400px;
-	/*there isn't a huge difference between these two methods */
-}
-
 
 /* 3A) TWITTER FEED */
 #twitterWidget {
     position: absolute;
-    margin-left: 600px;
-    margin-top: 10px;
-    max-width: 510px;
-    max-height: 666px;
+    left: 72%;
+    top: 47.1%;
+    max-width: 483px;
+    max-height: 445px;
     width: 100%;
     height: 100%;
-    padding: 5px;
-    /* border: 3px white solid; */
+    border-style: none;
 }
 
 #twitterWidget iframe {
     width: inherit;
     height: inherit;
 }
-
-#tableDiv {
-	height: 900px;
-	width: 700 px;
-}
-
 
