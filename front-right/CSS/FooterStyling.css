@@ -5,15 +5,15 @@ Main references used for this widget:
 */
 /* 1A) FOOTER GENERAL */
 
-footer{
+footer {
     position: fixed;
     bottom: 0px;
     background-color: rgba(3, 3, 20, 0.5);
     display: block;
     width: 100%;
     left: -2.6px;
-    height: 45px;
-    border: 3px white solid;
+    height: 55px;
+    /* border: 3px white solid; */
 }
 
 /* 2A) ANIMATION */
@@ -76,8 +76,8 @@ footer{
 	color: white; 
 	font-family: 'Lora', serif;
     letter-spacing: .6px;
-	font-size: 21px; 
-	line-height: 25px;
+	font-size: 23px; 
+	line-height: 27.5px;
     display: inline;
     overflow: hidden;
 }

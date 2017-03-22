@@ -19,7 +19,9 @@ nav {
 
 #header {
 	background-color: rgba(3, 3, 20, 0.3);
-	height: 125px;
+	height: 130px;
+    max-width: 100%;
+    position: static;
     /* border: 5px grey solid; */
 }
 
@@ -32,7 +34,7 @@ nav {
 	padding-left: 25px;
 	max-width: 60%;
 	max-height: 60%;
-	filter:brightness(110%);
+	filter: brightness(110%);
 	/* border: 3px red solid; */
 	
 	/*padding: 20px;
@@ -67,6 +69,32 @@ two day 300 x 100 */
     max-width: 100%;
     /* border: 3px red solid; */
 }
+
+
+ #weather-app{
+	   position: absolute;
+	   left: 1450px;
+	   font-family: 'Roboto';
+	   color: rgb(255,255,255);
+	   font-size: 14pt;
+	   width:250px;
+	   height: 125px;
+		 justify-content: space-around;
+	 }
+	 #weather-info{
+	   display: flex;
+	   flex-direction: column;
+	   justify-content: space-around;
+	 }
+	 #weather-icon img{
+	   width: 100px;
+	 }
+	 #weather-condition{
+	   text-align: center;
+	   font-size: 16pt;
+	   font-weight: bold;
+	 }
+
 
 /* 4C) CLOCK*/
 

@@ -13,8 +13,15 @@
         <script type="text/javascript" src="js/WeatherWidget.js"></script>
         <script type="text/javascript" src="js/ProjectHours.js"></script>
 		<script type="text/javascript" src = "js/slideshow.js"> </script>
+<<<<<<< HEAD
+		<script src="http://www.google.com/jsapi?key=ABQIAAAA8vZM7PPo_jrCr2so5UuDuRSS4VFQD4xI8WVkFNtk4-BcwaOr5hRhGyOzw2C4YoFpqGDyLh5Cc_rMtQ" type="text/javascript"></script>
+		<script type="text/javascript" src="js/shuttle.js"> </script>
+		
+=======
+		<script type="text/javascript" src="js/shuttle.js"> </script>
+>>>>>>> c3366247dc2f6f2afb45afb654453c11efe329ce
     </head>
-<body onLoad="switchImage('slide')"> <!-- onload for slideshow -->
+<body onLoad="switchImage('slide'); weatherLoad()" style> <!-- onload for slideshow -->
 	<div id="header">
 <!----------------------------------------------------------------------->
 <!-------- HEADER BEGINS; ORDER OF ELEMENTS: LOGO, WEATHER, CLOCK. ------>
@@ -25,11 +32,18 @@
 				<div id="weather-clock">
 <!----------------------------------------------------------------------->
 <!-----------Weather widget, provided by weather underground ------------>
-					<div id="weather">
-						<span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;"><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:05401.1.99999&bannertypeclick=wu_clean2day" title="Burlington, Vermont Weather Forecast" target="_blank">
-						<img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&airportcode=KBTV&ForcedCity=Burlington&ForcedState=VT&zip=05401&language=EN" alt="Find more about Weather in Burlington, VT" width="300" /></a>	
-					</div>
-					
+					<div id = "weather-app">
+						<div id="weather-icon-container">
+							<div id = "weather-icon"></div>
+							<div id = "weather-condition">info error!</div>
+						</div>
+						<div id = "weather-info">
+							<div id = "weather-city-name">info error!</div>
+							<div id = "weather-current-temp">info error!</div>
+							<div id = "weather-max-temp">info error!</div>
+							<div id = "weather-min-temp">info error!</div>
+						</div>
+					</div>		
 <!----------------------------------------------------------------------->
 <!----------------------- Clock: date and time -------------------------->
 					<div id="clock">
@@ -56,9 +70,33 @@
     <main>
 <!-----------------------------------------------------------------------> 
 <!-----------------------------------------------------------------------> 
-<!--- MAIN CONTENT BEGINS. ORDER: (PROJECT HOURS, SLIDESHOW, TWITTER)? -->
+<!-- MAIN CONTENT BEGINS. (SHUTTLE, SLIDESHOW, PROJECT HOURS & TWITTER)-->
 <!----------------------------------------------------------------------->
 
+<!----------------------------------------------------------------------->  
+		<div id = "container">
+			<div id = "slideShow">
+				<img src="images/img2.jpeg" alt="img" name = "slide" class="slides">
+			</div>
+		</div>    
+<!----------------------------------------------------------------------->  
+        <!-- <div id="shuttleWidget"> -->
+			<div class="map_container" style="padding-bottom">
+				<div id="map_canvas" class="slides" style="background-color: rgb(229, 227, 223); overflow: hidden;">
+				</div>
+			</div>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script>
+				initMap();
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyDGcCGnSR7EjICQ-57_UFPHEeMnAR022L8&amp;callback=initMap"></script>
+<!----------------------------------------------------------------------->
+        <div id="twitterWidget">    
+        
+            <iframe src="backend/backend.html" scrolling="no" name="internal"></iframe>
+        
+        </div>
 <!----------------------------------------------------------------------->  
         <div id="tableDiv">
             <table id="dataTable">
@@ -69,23 +107,7 @@
                     </tr>
                 </thead>
             </table>
-        </div>
-
-<!----------------------------------------------------------------------->  
-        <div id="twitterWidget">    
-        
-            <iframe src="backend/backend.html" name="internal"></iframe>
-        
-        </div>
-<!----------------------------------------------------------------------->  
-
-		
-		<div id = "container">
-			<div id = "slideShow">
-				<img src="images/img2.jpeg" alt="img" name = "slide" id="slides">
-			</div>
-		</div>
-		
+        </div>	
 <!----------------------------------------------------------------------->
 <!------------------------ MAIN CONTENT ENDS. --------------------------->
 <!----------------------------------------------------------------------->
