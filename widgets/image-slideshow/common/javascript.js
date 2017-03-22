@@ -49,7 +49,7 @@ function switchImage(place) {
   var marginVertNum = "";
   var marginHortizontalNum="";
 
-  for (var i = 0; i < imageArray.length; i++) {
+  /*for (var i = 0; i < imageArray.length; i++) {
     if(tmpHeight < imageArray[i].image_item.height){
       tmpHeight = imageArray[i].image_item.height;
       document.getElementById("slideShow").style.height = tmpHeight +"px";
@@ -57,11 +57,11 @@ function switchImage(place) {
     if(imageArray[i].image_item.width > tmpWidth){
       tmpWidth = imageArray[i].image_item.width;
       document.getElementById("slideShow").style.width = tmpWidth +"px";
-    }
-  }
+    }*/
+  //}
   var new_image = getNextImage();
   document[place].src = new_image;
-
+/*
   marginVertNum = (tmpHeight - imageArray[imageNum].image_item.height)/2;
   document.getElementById("slides").style.marginTop = marginVertNum +"px";
   document.getElementById("slides").style.marginBot = marginVertNum +"px";
@@ -69,7 +69,7 @@ function switchImage(place) {
   marginHortizontalNum = (tmpWidth - imageArray[imageNum].image_item.width)/2;
   document.getElementById("slides").style.marginLeft = marginHortizontalNum +"px";
   document.getElementById("slides").style.marginRight = marginHortizontalNum +"px";
-
+*/
   var recur_call = "switchImage('"+place+"')";
   timerID = setTimeout(recur_call, interval);
 }

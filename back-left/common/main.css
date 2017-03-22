@@ -31,14 +31,16 @@ nav {
 
 #lcdibanner {
 	padding: 1%;
-
+  font-family: 'Roboto';
 	width: 248px;
 	height: 53px;
 }
 
 #clock {
-	font-family: Arial, sans-serif;
-	color: rgb(98, 153, 152);
+	text-align: center;
+	font-size: 14pt;
+	font-family: 'Roboto';
+	color: rgb(255, 255, 255);
 	padding: 1%;
 	width: 160px;
 	padding-top: 7%;
@@ -122,14 +124,9 @@ h2, h4 {
 	position: absolute;
 }
 
-#RSS{
-	top: 604px;
-	left:1259px;
-}
-
 footer {
 	position: absolute;
-	bottom: 0;
+	bottom: 23px;
 	width: 100%;
 	text-align: center;
 	background-color: rgba(26, 26, 26, 0.3);
@@ -140,12 +137,20 @@ p {
 	color: rgb(98, 153, 152);
 }
 
+#RSS{
+	width: 580px;
+	position: absolute;
+	left: 1259px;
+	top: 603px;
+}
+
 .gCalFlow {
  position: relative;
  width: 400px;
  height: 200px;
  float: left;
  font-size: 90%;
+ font-family: 'Roboto';
  overflow: hidden;
  text-decoration: none;
  padding-bottom: 0.5em; }
@@ -228,3 +233,28 @@ p {
    zoom: 1; }
  .gCalFlow .gcf-item-body-block {
    color: #ffffff; }
+
+
+	 #weather-app{
+	   position: absolute;
+	   left: 1450px;
+	   font-family: 'Roboto';
+	   color: rgb(255,255,255);
+	   font-size: 14pt;
+	   width:250px;
+	   height: 125px;
+		 justify-content: space-around;
+	 }
+	 #weather-info{
+	   display: flex;
+	   flex-direction: column;
+	   justify-content: space-around;
+	 }
+	 #weather-icon img{
+	   width: 100px;
+	 }
+	 #weather-condition{
+	   text-align: center;
+	   font-size: 16pt;
+	   font-weight: bold;
+	 }

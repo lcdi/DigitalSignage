@@ -185,9 +185,11 @@
         return this.opts.data_url;
       } else if (this.opts.mode === 'updates') {
         now = new Date().toJSON();
+        console.log(now);
         return "https://www.googleapis.com/calendar/v3/calendars/" + this.opts.calid + "/events?key=" + this.opts.apikey + "&maxResults=" + this.opts.maxitem + "&orderBy=updated&timeMin=" + now + "&singleEvents=true";
       } else {
         now = new Date().toJSON();
+        console.log(now);
         return "https://www.googleapis.com/calendar/v3/calendars/" + this.opts.calid + "/events?key=" + this.opts.apikey + "&maxResults=" + this.opts.maxitem + "&orderBy=startTime&timeMin=" + now + "&singleEvents=true";
       }
     };
