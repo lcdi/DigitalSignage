@@ -1,12 +1,13 @@
 <html>
-<head>
-<style>
-.tw-feed {width:450px;color:#fff;background: #555;padding:10px;border: solid 5px #555; border-radius:10px;}
-.tw-feed a {color:#fff;text-decoration:none;}
-.tw-feed a:hover {color:#ccc;text-decoration:none;}
-.twitter-timeline {position:relative;}\
-</style>
-<script>
+    <head>
+        <style>
+            .tw-feed {width:450px !important; height:555px;color:#fff;background: #555;padding1:10px;border: solid 9px #555; border-radius:5px;overflow:hidden;}
+            .tw-feed a {color:#fff;text-decoration:none;}
+            .tw-feed a:hover {color:#ccc;text-decoration:none;}
+            .twitter-timeline {position:fixed;}
+        </style>
+        
+        <script>
 window.twttr = (function (d,s,id) {
     var t, js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
@@ -21,23 +22,24 @@ twttr.ready(function (twttr) {
         console.log("update twitter timeline");
     }, 100);
 });
-</script>
-</head>
-<body >
-<div class="tw-feed">  
-   <a class="twitter-timeline" href="https://twitter.com/ChampForensics"
-   data-theme="dark"
-   data-link-color="#ccc"
-   background="#1b3b5f"
-   border-radius="none"
-   data-chrome="nofooter noborders"
-   data-screen-name="ChampForensics" data-show-replies="false"
-   data-tweet-limit="5"
-   >
-   Tweets by ChampForensics</a> 
-   <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div>
+        </script>
+    </head>
 
-</body>
+    <body>
+        <div class="tw-feed">  
+   
+            <a class="twitter-timeline" href="https://twitter.com/AlvesAlvesvic1/lists/Tweets"
+            data-theme="dark"
+            data-link-color="#ccc"
+            background="#1b3b5f"
+            border-radius="none"
+            data-chrome="noheader nofooter noscrollbar"
+            data-tweet-limit="2"
+            </a> 
+   
+            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+
+    </body>
 </html>
           

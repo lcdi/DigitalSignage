@@ -3,24 +3,28 @@
     <head>
         <title>LCDI Digital Signage</title>
         <meta charset="utf-8"/>
+<!----------------------------------------------------------------------->
+<!------------------------ STYLESHEETS ---------------------------------->
+<!----------------------------------------------------------------------->
         <link rel="stylesheet" type="text/css" href="css/HeaderStyling.css"/>
         <link rel="stylesheet" type="text/css" href="css/MainStyling.css"/>
         <link rel="stylesheet" type="text/css" href="css/FooterStyling.css"/>
         <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-        <!-- <link rel="stylesheet" href="test.css"/> -->
+<!----------------------------------------------------------------------->
+<!------------------------- JAVASCRIPT ---------------------------------->
+<!----------------------------------------------------------------------->
         <script src="js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="js/ClockWidget.js"></script>
         <script type="text/javascript" src="js/WeatherWidget.js"></script>
         <script type="text/javascript" src="js/ProjectHours.js"></script>
 		<script type="text/javascript" src = "js/slideshow.js"> </script>
-<<<<<<< HEAD
 		<script src="http://www.google.com/jsapi?key=ABQIAAAA8vZM7PPo_jrCr2so5UuDuRSS4VFQD4xI8WVkFNtk4-BcwaOr5hRhGyOzw2C4YoFpqGDyLh5Cc_rMtQ" type="text/javascript"></script>
 		<script type="text/javascript" src="js/shuttle.js"> </script>
-		
-=======
-		<script type="text/javascript" src="js/shuttle.js"> </script>
->>>>>>> c3366247dc2f6f2afb45afb654453c11efe329ce
+<!----------------------------------------------------------------------->
+<!----------------------------------------------------------------------->
+<!----------------------------------------------------------------------->
     </head>
+
 <body onLoad="switchImage('slide'); weatherLoad()" style> <!-- onload for slideshow -->
 	<div id="header">
 <!----------------------------------------------------------------------->
@@ -31,21 +35,23 @@
 				<img id = "logo" src="images/new_lcdi.png" alt="lcdi icon"/>
 				<div id="weather-clock">
 <!----------------------------------------------------------------------->
-<!-----------Weather widget, provided by weather underground ------------>
+<!------------------- WEATHER: CURRENT, HIGH, LOW ----------------------->
+<!----------------------------------------------------------------------->
 					<div id = "weather-app">
 						<div id="weather-icon-container">
 							<div id = "weather-icon"></div>
-							<div id = "weather-condition">info error!</div>
+							<div id = "weather-condition"></div>
 						</div>
 						<div id = "weather-info">
-							<div id = "weather-city-name">info error!</div>
-							<div id = "weather-current-temp">info error!</div>
-							<div id = "weather-max-temp">info error!</div>
-							<div id = "weather-min-temp">info error!</div>
+							<div id = "weather-city-name"></div>
+							<div id = "weather-current-temp"></div>
+							<div id = "weather-max-temp"></div>
+							<div id = "weather-min-temp"></div>
 						</div>
 					</div>		
 <!----------------------------------------------------------------------->
-<!----------------------- Clock: date and time -------------------------->
+<!----------------------- CLOCK: DATE & TIME ---------------------------->
+<!----------------------------------------------------------------------->
 					<div id="clock">
 						<div id="date">
 							<script>
@@ -68,7 +74,6 @@
     
     
     <main>
-<!-----------------------------------------------------------------------> 
 <!-----------------------------------------------------------------------> 
 <!-- MAIN CONTENT BEGINS. (SHUTTLE, SLIDESHOW, PROJECT HOURS & TWITTER)-->
 <!----------------------------------------------------------------------->
@@ -93,9 +98,7 @@
 			<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyDGcCGnSR7EjICQ-57_UFPHEeMnAR022L8&amp;callback=initMap"></script>
 <!----------------------------------------------------------------------->
         <div id="twitterWidget">    
-        
             <iframe src="backend/backend.html" scrolling="no" name="internal"></iframe>
-        
         </div>
 <!----------------------------------------------------------------------->  
         <div id="tableDiv">
