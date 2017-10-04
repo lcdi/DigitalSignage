@@ -8,7 +8,7 @@ $(document).ready(
 
         $.ajax({
             type: "POST",
-            url: "login.php",
+            url: "src/login/admin_script.php",
             data: dataString,
             cache: false
         }).done(function(response){

@@ -1,19 +1,6 @@
 <?php
-
-function sanitizeString($string)
-{
-    $string = htmlspecialchars($string);
-    $string = stripslashes($string);
-    $string = strip_tags($string);
-    return $string;
-}
-
-function sanitizeSQL($connection, $string)
-{
-    $string = $connection->real_escape_string($string);
-    $string = sanitizeString($string);
-    return $string;
-}
+require "../login.php";
+require "../sanitize.php";
 
 $un = $_POST["un"];
 $pw = $_POST["pw"];
@@ -22,11 +9,6 @@ if($un=="" || $pw=="")
 {
     die("Username and password are required");
 }
-
-$host = "localhost";
-$user = "root";
-$pass = "password9378";
-$db = "test";
 
 $conn = new mysqli($host, $user, $pass, $db);
 if($conn->connect_error)
@@ -37,11 +19,8 @@ if($conn->connect_error)
 $stmt = $conn->prepare("SELECT passwordhash FROM users WHERE username LIKE ?");
 $stmt->bind_param("s", $un);
 
-
-
-//$un = sanitizeSQL($conn, $un);
-//$pw = sanitizeSQL($conn, $pw);
-//echo "test";
+$un = santitizeMySQL($conn, $un);
+$pw = santitizeMySQL($conn, $pw);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -51,15 +30,15 @@ if($result->num_rows > 0)
     {
         if(password_verify($pw, $row["passwordhash"]))
         {
-            echo "otherpage.html";
-            //echo "Login successful";
+            //echo ".html";
+            //TO CHANGE TO WHATEVER THE LANDING PAGE WILL BE
         }
         else{
             echo "Login failed";
         }
     }
 } else{
-    echo "No username";
+    echo "Login failed";
 }
 
 ?>
