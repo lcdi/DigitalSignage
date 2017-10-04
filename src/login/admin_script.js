@@ -12,6 +12,8 @@ $(document).ready(
             data: dataString,
             cache: false
         }).done(function(response){
+            //Checks to see if the php script responded with an HTML page
+            //If true goes to the returned HTML page
             if(response.indexOf(".html") != -1)
             {
                 window.location = response;

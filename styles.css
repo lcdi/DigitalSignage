@@ -1,4 +1,7 @@
-body {
+/* 
+    ===LOGIN PAGE STYLE===
+*/
+body.admin {
     padding-top: 150px;
     padding-bottom: 40px;
     background-color: #eee;
@@ -42,6 +45,7 @@ body {
 .form-signin button[id="login"] {
     background-color: #28724F;
 }
+
 #responseText {
     color: #FF0000;
     text-align: center;
