@@ -1,0 +1,23 @@
+html, body{
+    height: 100%;
+}
+
+.sidenav {
+    float:left;
+    height: 100%;
+    width: 300px;
+    padding: 10px;
+    background-color: #eee;
+}
+
+.add-user{
+
+}
+
+.main{
+    float: left;
+}
+
+.main #createUser{
+    margin-top: 10px;
+}

@@ -1,6 +1,6 @@
 <?php
-require "../login.php";
-require "../sanitize.php";
+require "../php/login.php";
+require "../php/sanitize.php";
 
 $un = $_POST["un"];
 $pw = $_POST["pw"];
@@ -33,8 +33,8 @@ if($result->num_rows > 0)
     {
         if(password_verify($pw, $row["passwordhash"]))
         {
-            //echo ".html";
-            //TO CHANGE TO WHATEVER THE LANDING PAGE WILL BE
+            //location of landing page relative to the HTML file
+            echo "src/landing/adminlanding.html";
         }
         else{
             echo "Login failed";
