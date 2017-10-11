@@ -24,4 +24,20 @@ $(document).ready(
             
         });
     });
+
+    // Checks if enter is pressed in textfield
+    $('#uname').keydown(function(e){
+        if(e.keyCode == 13)
+        {
+            $("#login").click();
+        }
+    });
+
+    // Checks if enter is pressed in textfield
+    $('#psw').keydown(function(e){
+        if(e.keyCode == 13)
+        {
+            $("#login").click();
+        }
+    });
 });
