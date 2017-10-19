@@ -5,11 +5,11 @@
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <title>Bootstrap Tutorial</title>
 <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link type="text/css" href="css/bootstrap-table.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-table.js"></script>
-<script src="js/bootmysql.js"></script>
+<link type="text/css" href="../css/bootstrap-table.css" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-table.js"></script>
+<script src="../js/bootmysql.js"></script>
 <style>
 		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 		.row.content {height: 100%}
@@ -36,7 +36,6 @@
 					  <span class="icon-bar"></span>
 					  <span class="icon-bar"></span>                        
 					</button>
-					<a class="navbar-brand" href="#"><img class="img-thumbnail" src="logo.png"></a>
 				  </div>
 				  <div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
@@ -63,12 +62,8 @@
 						<div class="col-md-9">
 							<div class="page-header">
 								<h1>
-									Boot in MySQL
+									Table with Buttons
 								</h1>
-							</div>
-									<div id="toolbar">
-												<button id="remove" class="btn btn-default">remove</button>
-										</div>
 							<table 	id="table" class="display"
 								data-show-columns="true"
 								data-height="600">
@@ -76,26 +71,27 @@
 						
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div id="toolbar">
-												<button id="remove" class="btn btn-default">remove</button>
-										</div>
-						<table data-toggle="table" data-url="loadtable.php">
-							<thead>
-								<tr>
-									<th data-field="author">Item ID</th>
-									<th data-field="title">Item Name</th>
-									<th data-field="category">Item Price</th>
-									<th data-field="year">Year</th>
-									<th data-field="isbn">ISBN</th>
-									<th data-field="remove">Remove</th>
-								</tr>
-							</thead>
-						</table>
 					</div>
-						
+					<!-- Modal -->
+  <div class="modal fade" id="message" role="dialog">
+			<div class="modal-dialog">
+			
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"></h4>
 					</div>
-
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
 		
 
 </body>
