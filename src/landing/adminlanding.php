@@ -1,3 +1,14 @@
+<?php
+
+require_once ("../php/global.php");
+
+if(!isset($_SESSION['user']))
+{
+    //redirect_to("/digitalsignage/index.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <title>Admin Page</title>
