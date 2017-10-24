@@ -4,7 +4,7 @@ require_once ("../php/global.php");
 
 if(!isset($_SESSION['user']))
 {
-    //redirect_to("/digitalsignage/index.php");
+    redirect_to("../../index.php?to=src/landing/adminlanding.php");
 }
 
 ?>
