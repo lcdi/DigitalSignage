@@ -43,6 +43,7 @@ class DSConn{
     /* Runs query to insert data into table */
     public function insert($table, $data_array)
     {
+        $result = array("success"=>false);
         $connect_result = $this->connect();
         if($connect_result)
         {
@@ -69,12 +70,16 @@ class DSConn{
             $query .= ");";
 
             mysqli_query($this->connection, $query);
+            $result["success"] = true;
         }
+
+        return $result;
     }
 
     /* Runs query to update data on table */
     public function update($table, $data_array, $where = false)
     {
+        $result = array("success"=>false);
         $connect_result = $this->connect();
         if($connect_result)
         {
@@ -96,14 +101,16 @@ class DSConn{
             $query .= ";";
 
             mysqli_query($this->connection, $query);
+            $result["success"] = true;
         }
+        return $result;
     }
 
     /* Runs query and returns associative array for fields on table 
      * Returns false if the query fails or an array of associative array if it succeeds */
     public function get_assoc($table, $fields, $where = false)
     {
-        $result = false;
+        $result = array("success"=>false, "data"=>"TEST");
 
         $connect_result = $this->connect();
         if($connect_result)
@@ -118,7 +125,7 @@ class DSConn{
             {
                 foreach($fields as $field)
                 {
-                    $safe_fields[] = "'".mysqli_real_escape_string($this->connection, $field);
+                    $safe_fields[] = mysqli_real_escape_string($this->connection, $field);
                 }
                 $safe_field_string = join(",", $safe_fields);
             }
@@ -134,10 +141,11 @@ class DSConn{
         $query_result = mysqli_query($this->connection, $query);
         if($query_result)
         {
-            $result = array();
+            $result['success'] = true;
+            $result['data'] = array();
             while($row = mysqli_fetch_assoc($query_result))
             {
-                $result[] = $row;
+                $result['data'][] = $row;
             }
         }
 
@@ -149,6 +157,7 @@ class DSConn{
      * and it's contents are $field => $value to delete */
     public function delete($table, $data_array)
     {
+        $result = array("success"=>false);
         $connect_result = $this->connect();
         if($connect_result)
         {
@@ -159,27 +168,31 @@ class DSConn{
 
             foreach($data_array as $field => $value)
             {
-                $safe_values = "'".mysqli_real_escape_string($this->connection, $value)."'";
+                $safe_value = "'".mysqli_real_escape_string($this->connection, $value)."'";
                 $safe_field = mysqli_real_escape_string($this->connection, $field);
-                $safe_data[] = "$safe_field LIKE $safe_values";
+                $safe_data[] = "$safe_field LIKE $safe_value";
             }
 
             $query = "DELETE FROM $safe_table WHERE ";
             $query .= join(" AND ", $safe_data);
             $query .= ";";
-            
-            echo $query;
+
             mysqli_query($this->connection, $query);
         }
+        return $result;
     }
 
     public function make_safe($string)
     {
+        $result = array("success"=>false, "data"=>NULL);
         $connect_result = $this->connect();
         if($connect_result)
         {
-            return mysqli_real_escape_string($this->connection, $string);
+            $result["success"] = true;
+            $result["data"] = mysqli_real_escape_string($this->connection, $string);
         }
+
+        return $result;
     }
 }
 
