@@ -36,7 +36,8 @@ $(document).ready(()=>{
                 }],
                 onClickCell:(field, value, row, $element)=>
                 {
-                    console.log(row.zip);
+                    row.field = field;
+                    console.log(row);
                     console.log(field);
                     if(field === 'remove')
                     {
@@ -44,10 +45,13 @@ $(document).ready(()=>{
                             console.log(row);
                             $.ajax({
                                 type: 'POST',
-                                url: '../tables/remove.php',
+                                url: 'bootmysql.php',
                                 data: row,
                                 success: (response)=>
                                 {
+                                    $("#message .modal-body").html(response);
+                                    $modal.on('show.bs.modal',(response)=>{
+                                    }).modal("show");
                                     location.reload();
                                     //console.log(response);
                                 },
@@ -66,33 +70,14 @@ $(document).ready(()=>{
                     {
                         $('.edit').on('click', ()=>{
                             
-                            $("#message .modal-body").html('<form id="edit_form" action="#"><div class="form-group"><label for="zip">Zip Code</label><input type="text" class="form-control" id="zip" name="zip" placeholder="'+row.zip+'"></div><label for="country">Country</label><input type="text" class="form-control" id="country" name="country" placeholder="'+row.country+'"></div><button type="submit" class="btn btn-primary">Submit</button></form>');
+                            $("#message .modal-body").html('<form id="edit_form" action="edit.php" method="post"><div class="form-group"><label for="zip">Zip Code</label><input type="text" class="form-control" id="zip" name="zip" placeholder="'+row.zip+'"></div><label for="country">Country</label><input type="text" class="form-control" id="country" name="country" placeholder="'+row.country+'"></div><div><input type="hidden" name="key" value="'+row.zip+'"><input type="hidden" name="field" value="'+field+'"></div><button type="submit" class="btn btn-primary">Submit</button></form>');
                            
                             $modal.on('show.bs.modal', ()=>{}).modal("show");
-                            $("#edit_form").submit((event)=>
-                            {
-                                console.log(event);
-                                event.preventDefault();
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '../tables/edit.php',
-                                    data: row,
-                                    success:(response)=>
-                                    {
-                                        ///location.reload();
-                                        window.onbeforeunload = function(e) {
-                                            // Turning off the event
-                                            e.preventDefault();
-                                        }
-                                    },
-                                    error: (e)=>
-                                    {
-                                        $("#message .modal-body").html(e);
-                                        $modal.on('show.bs.modal',(e)=>{
-                                        }).modal("show"); 
-                                    }
-                                })
-                            })
+                            $("#edit_form").on('submit',(event)=>{
+                                $("#message .modal-body").html(e);
+                                $modal.on('show.bs.modal',(e)=>{
+                                }).modal("show");
+                            });
                         })
                     }
                 }

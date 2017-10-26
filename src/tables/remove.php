@@ -14,7 +14,7 @@
         
     }else
     {
-        die("Query Fail\n" . $_POST['zip']);
+        die("Query Fail\n");
     }
     $conn->close();
     echo("Successful Query!\n");

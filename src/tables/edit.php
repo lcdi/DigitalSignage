@@ -8,11 +8,13 @@
     {
         $zip = santitizeMySQL($conn, $_POST['zip']);
         $country = santitizeMySQL($conn, $_POST['country']);
-        $query = "UPDATE weather SET zip='$zip', country='$country' WHERE zip='$zip';
+        $key = santitizeMySQL($conn, $_POST['key']);
+        $query = "UPDATE weather SET zip='$zip', country='$country' WHERE zip='$key'";
         $result = $conn->query($query);
         
     }else
     {
+        echo($_POST['zip'] . $_POST['country'] . $_POST['key']);
         die("Query Fail\n" . $_POST['zip']);
     }
     $conn->close();
