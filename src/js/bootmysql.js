@@ -37,8 +37,6 @@ $(document).ready(()=>{
     // Possibly on a click
     var tableNumIndex = 0;
 
-    var tableArray = [weather_info, project_hours_info];
-
     // Grab the specific table that you are going to look at
     var table = tableArray[tableNumIndex];
 
