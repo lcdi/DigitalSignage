@@ -1,4 +1,5 @@
 <?php
+// Obsolete putting into rowfunctions.php
     require_once 'login.php';
     require_once '../php/sanitize.php';
     $conn = new mysqli($hn,$un,$pw,$db);
