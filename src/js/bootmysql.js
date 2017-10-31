@@ -1,5 +1,6 @@
 $(document).ready(()=>{
     var $modal = $('#message');
+    var tableIndex = -1;
 
     // Table info for bootstrap table generation and SQL query
     var tableArray = [
@@ -154,31 +155,22 @@ $(document).ready(()=>{
     }
     
     // Change this so that it works properly idk how but do it
-    $("#clickme").click(function(e){
+    $(".clickme").click(function(e){
         // If there is already a bootstrap table
-        if($(".bootstrap-table").length)
+        const tableNum = $(this).attr('id');
+        console.log(tableNum);
+        if(tableIndex != tableNum)
         {
-            // Replace it with the original container
-            $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
-            "</table>" +
-            "</div>");
-            $(".clearfix").remove();
+            if($(".bootstrap-table").length)
+            {
+                // Replace it with the original container
+                $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
+                "</table>" +
+                "</div>");
+                $(".clearfix").remove();
+            }
+            tableIndex = tableNum;
+            createTable(tableNum);
         }
-
-        createTable(0);
-    });
-
-    $('#clickmeinstead').click(function(e){
-        // If there is already a bootstrap table
-        if($(".bootstrap-table").length)
-        {
-            // Replace it with the original container
-            $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
-            "</table>" +
-            "</div>");
-            $(".clearfix").remove();
-        }
-
-        createTable(1);
     });
 })
