@@ -1,5 +1,4 @@
 $(document).ready(()=>{
-    var $table = $('.display');
     var $modal = $('#message');
 
     // Table info for bootstrap table generation and SQL query
@@ -33,46 +32,6 @@ $(document).ready(()=>{
         }
     ];
 
-    // To be pulled from the html page?
-    // Possibly on a click
-    var tableNumIndex = 0;
-
-    // Grab the specific table that you are going to look at
-    var table = tableArray[tableNumIndex];
-
-    // Table data is the columns for bootstrap
-    var tableData = [];
-    for(var i = 0; i < table["numCols"]; i++)
-    {
-        console.log(table["col"+i]);
-        // Get the column information and push 
-        // the JSON object to the array
-        var col = table["col"+i];
-        tableData.push(
-            {
-                field: col["field"],
-                title: col["title"]
-            }
-        );
-    }
-
-    // Push the option buttons to the array
-    tableData.push({
-        title: 'options',
-        field: 'Options',
-        align: 'center',
-        events: operateEvents,
-        formatter: (response)=>
-        {
-            return [
-                '<button class="btn glyphicon glyphicon-trash remove"></button> ',
-                '<button class="btn glyphicon glyphicon-pencil edit"></button>'
-            ].join('');
-        }
-    });
-
-    console.log(tableData);
-
     var operateEvents = {
         'click .remove':(e, value, row, index)=> {
             $.ajax({
@@ -98,7 +57,7 @@ $(document).ready(()=>{
             {
                 const zip = $('#zip').val();
                 const country = $("#country").val();
-                console.log(zip + " " + country);
+                //console.log(zip + " " + country);
                 var data = {"zip":zip, "country":country, "oZip":row.zip, "oCountry":row.country};
                 if(zip === "")
                 {
@@ -131,25 +90,95 @@ $(document).ready(()=>{
         }
     };
 
-    //Use this to determine the table used
-    var data = {'table':table["table"]};
-    $.ajax(
+    function createTable(tableNumIndex)
     {
-        type: 'POST',
-        url: 'loadtable.php',
-        data: data,
-        success: (response)=>
-        { 
-            //console.log(response);
-            $table.bootstrapTable({
-                contentType:'application/json',
-                data: JSON.parse(response),
-                search: true,
-                pagination: true,
-                buttonsClass: 'primary',
-                showFooter: true,
-                minimumCountColumns: 3,
-                columns: tableData,
-            });
-        }});
+        $table = $('.display');
+        // Grab the specific table that you are going to look at
+        var table = tableArray[tableNumIndex];
+    
+        // Table data is the columns for bootstrap
+        var tableData = [];
+        for(var i = 0; i < table["numCols"]; i++)
+        {
+            //console.log(table["col"+i]);
+            // Get the column information and push 
+            // the JSON object to the array
+            var col = table["col"+i];
+            tableData.push(
+                {
+                    field: col["field"],
+                    title: col["title"]
+                }
+            );
+        }
+
+        //console.log(tableData);
+    
+        // Push the option buttons to the array
+        tableData.push({
+            title: 'options',
+            field: 'Options',
+            align: 'center',
+            events: operateEvents,
+            formatter: (response)=>
+            {
+                return [
+                    '<button class="btn glyphicon glyphicon-trash remove"></button> ',
+                    '<button class="btn glyphicon glyphicon-pencil edit"></button>'
+                ].join('');
+            }
+        });
+
+        //Use this to determine the table used
+        var data = {'table':table["table"]};
+        $.ajax(
+        {
+            type: 'POST',
+            url: 'loadtable.php',
+            data: data,
+            success: (response)=>
+            { 
+                //console.log(response);
+                $table.bootstrapTable({
+                    contentType:'application/json',
+                    data: JSON.parse(response),
+                    search: true,
+                    pagination: true,
+                    buttonsClass: 'primary',
+                    showFooter: true,
+                    minimumCountColumns: 3,
+                    columns: tableData,
+                });
+            }
+        });
+    }
+    
+    // Change this so that it works properly idk how but do it
+    $("#clickme").click(function(e){
+        // If there is already a bootstrap table
+        if($(".bootstrap-table").length)
+        {
+            // Replace it with the original container
+            $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
+            "</table>" +
+            "</div>");
+            $(".clearfix").remove();
+        }
+
+        createTable(0);
+    });
+
+    $('#clickmeinstead').click(function(e){
+        // If there is already a bootstrap table
+        if($(".bootstrap-table").length)
+        {
+            // Replace it with the original container
+            $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
+            "</table>" +
+            "</div>");
+            $(".clearfix").remove();
+        }
+
+        createTable(1);
+    });
 })
