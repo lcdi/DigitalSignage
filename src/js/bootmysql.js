@@ -7,28 +7,71 @@ $(document).ready(()=>{
         {
             "table" : "weather",
             "numCols" : 2, 
-            "col0":{ 
+            "col0" : { 
                 "field" : "zip",
-                "title" : "Zip"
+                "title" : "Zip",
+                sortable: true
             },
-            "col1":{
+            "col1" : {
                 "field" : "country",
-                "title" : "Country"
+                "title" : "Country",
+                sortable: true
             }
         },{
             "table" : "project_hours",
             "numCols" : 3,
             "col0" : {
                 "field" : "name",
-                "title" : "Project Name"
+                "title" : "Project Name",
+                sortable: true
             },
             "col1" : {
                 "field" : "people",
-                "title" : "People"
+                "title" : "People",
+                sortable: true
             },
             "col2" : {
                 "field" : "hours",
-                "title" : "Hours"
+                "title" : "Hours",
+                sortable: true
+            }
+        },{
+            "table" : "student",
+            "numCols" : 7,
+            "col0" : {
+                "field" : "id",
+                "title" : "ID",
+                sortable: true
+            },
+            "col1" : {
+                "field" : "name",
+                "title" : "Name",
+                sortable: true
+            },
+            "col2" : {
+                "field" : "major",
+                "title" : "Major",
+                sortable: true
+            },
+            "col3" : {
+                "field" : "pos",
+                "title" : "Position",
+                sortable: true
+            },
+            "col4" : {
+                "field" : "resofapp",
+                "title" : "Application Reason",
+                sortable: true
+            },
+            "col5" : {
+                "field" : "knowledge",
+                "title" : "Knowledge Gained",
+                sortable: true
+            },
+            "col6" : {
+                "field" : "picture",
+                "title" : "Picture",
+                sortable: true
             }
         }
     ];
@@ -105,12 +148,7 @@ $(document).ready(()=>{
             // Get the column information and push 
             // the JSON object to the array
             var col = table["col"+i];
-            tableData.push(
-                {
-                    field: col["field"],
-                    title: col["title"]
-                }
-            );
+            tableData.push(col);
         }
 
         //console.log(tableData);
@@ -124,7 +162,7 @@ $(document).ready(()=>{
             formatter: (response)=>
             {
                 return [
-                    '<button class="btn glyphicon glyphicon-trash remove"></button> ',
+                    '<button class="btn glyphicon glyphicon-trash remove"></button>',
                     '<button class="btn glyphicon glyphicon-pencil edit"></button>'
                 ].join('');
             }

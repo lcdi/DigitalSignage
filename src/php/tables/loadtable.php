@@ -2,7 +2,8 @@
     require_once 'login.php';
     $conn = new mysqli($hn,$un,$pw,$db);
     if($conn->connect_error) die($conn->connect_error);
-    if($_POST['table']==='weather' || $_POST['table'] ==='project_hours')
+    // There should be a way to make it so it doesn't have to check every table name case
+    if($_POST['table']==='weather' || $_POST['table'] ==='project_hours' || $_POST['table']==='student')
     {
         //echo($_POST['table']);
         loadTable($_POST['table'], $conn);
