@@ -135,7 +135,7 @@ $(document).ready(()=>{
         $.ajax(
         {
             type: 'POST',
-            url: 'loadtable.php',
+            url: '../php/tables/loadtable.php',
             data: data,
             success: (response)=>
             { 
@@ -158,7 +158,6 @@ $(document).ready(()=>{
     $(".clickme").click(function(e){
         // If there is already a bootstrap table
         const tableNum = $(this).attr('id');
-        console.log(tableNum);
         if(tableIndex != tableNum)
         {
             if($(".bootstrap-table").length)
@@ -169,6 +168,8 @@ $(document).ready(()=>{
                 "</div>");
                 $(".clearfix").remove();
             }
+            var buttonString = ".clickme#"+tableNum;
+            $("#table_head").text($(".clickme#"+tableNum).text());
             tableIndex = tableNum;
             createTable(tableNum);
         }

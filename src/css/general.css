@@ -3,21 +3,12 @@ html, body{
 }
 
 .sidenav {
-    float:left;
+    float: left;
     height: 100%;
-    width: 300px;
     padding: 10px;
     background-color: #eee;
 }
 
-.main{
-    float: left;
-}
-
 .main #createUser{
     margin-top: 10px;
-}
-
-.form-control{
-    margin-bottom: 5px;
 }
