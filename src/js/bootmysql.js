@@ -5,7 +5,7 @@ $(document).ready(()=>{
         'click .remove':(e, value, row, index)=> {
             $.ajax({
                 type: 'POST',
-                url: '../tables/remove.php',
+                url: '../php/tables/remove.php',
                 data: row,
                 success: (response)=>
                 {
@@ -38,7 +38,7 @@ $(document).ready(()=>{
                 }
                 $.ajax({
                     type: 'POST',
-                    url: '../tables/edit.php',
+                    url: '../php/tables/edit.php',
                     data: data,
                     success:(response)=>
                     {
@@ -90,11 +90,13 @@ $(document).ready(()=>{
             $.ajax(
                 {
                     type: 'POST',
-                    url: '../tables/loadtable.php',
+                    url: '../php/tables/loadtable.php',
                     data: data,
                     success: (response)=>
                     { 
+                        console.log(response);
                         var r = JSON.parse(response);
+                        console.log(r);
                         r.header[r.header.length] = options;
                         $table.bootstrapTable({
                             contentType:'application/json',
