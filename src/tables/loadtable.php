@@ -18,14 +18,14 @@
 		}
 		if (mysqli_num_rows($result) > 0) {
 			while ($row = mysqli_fetch_assoc($result)) {
-				echo $result;
-				$row['Field'];
-				array_push($columnArr, $name);	
-				//print_r($row);
+				$columnInfo = array();
+				$columnInfo['field'] = $row['Field'];
+				$columnInfo['title'] = $row['Field'];
+				$columnInfo['sortable'] = "true";
+				array_push($columnArr, $columnInfo);	
 			}
-			//print_r ($columnArr);
 		}
-		$response["column"] = $columnArr;
+		$response["header"] = $columnArr;
 		
 		$sqltran = mysqli_query($conn, "SELECT * FROM $tableName")or die(mysqli_error($conn));
 		$info = array();
@@ -37,12 +37,13 @@
 						$name = array();
 							for($j = 0; $j < count($columnArr); ++$j)
 							{
-								$name[$columnArr[$j]] = $rowList[$columnArr[$j]];
+								$name[$columnArr[$j]['field']] = $rowList[$columnArr[$j]['field']];
 							}			
 							array_push($info, $name);	
 			$i++;			
-	 	}
-	 		 echo  json_encode($info);
+		 }
+		$response["info"] = $info;
+	 	echo  json_encode($response);
  
 	}
     

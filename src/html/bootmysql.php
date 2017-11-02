@@ -37,9 +37,9 @@ if(!isset($_SESSION['user']))
             <div class="col-md-9">
                 <nav class="navbar navbar-default">
                     <ul class="nav navbar-nav">
-                    <li><a class="clickme" href="javascript:void(0)" id="0">Weather</a></li>
-                    <li><a class="clickme" href="javascript:void(0)" id="1">Project Hours</a></li>
-                    <li><a class="clickme" href="javascript:void(0)" id="2">Student Spotlight</a></li>
+                    <li><a class="tablebar" href="javascript:void(0)" id="weather">Weather</a></li>
+                    <li><a class="tablebar" href="javascript:void(0)" id="project_hours">Project Hours</a></li>
+                    <li><a class="tablebar" href="javascript:void(0)" id="student">Student Spotlight</a></li>
                     <!-- Add more buttons for tables here and add the table info into the js file -->
                     </ul>
                 </nav>

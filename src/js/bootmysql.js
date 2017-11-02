@@ -1,80 +1,5 @@
 $(document).ready(()=>{
     var $modal = $('#message');
-    var tableIndex = -1;
-
-    // Table info for bootstrap table generation and SQL query
-    var tableArray = [
-        {
-            "table" : "weather",
-            "numCols" : 2, 
-            "col0" : { 
-                "field" : "zip",
-                "title" : "Zip",
-                sortable: true
-            },
-            "col1" : {
-                "field" : "country",
-                "title" : "Country",
-                sortable: true
-            }
-        },{
-            "table" : "project_hours",
-            "numCols" : 3,
-            "col0" : {
-                "field" : "name",
-                "title" : "Project Name",
-                sortable: true
-            },
-            "col1" : {
-                "field" : "people",
-                "title" : "People",
-                sortable: true
-            },
-            "col2" : {
-                "field" : "hours",
-                "title" : "Hours",
-                sortable: true
-            }
-        },{
-            "table" : "student",
-            "numCols" : 7,
-            "col0" : {
-                "field" : "id",
-                "title" : "ID",
-                sortable: true
-            },
-            "col1" : {
-                "field" : "name",
-                "title" : "Name",
-                sortable: true
-            },
-            "col2" : {
-                "field" : "major",
-                "title" : "Major",
-                sortable: true
-            },
-            "col3" : {
-                "field" : "pos",
-                "title" : "Position",
-                sortable: true
-            },
-            "col4" : {
-                "field" : "resofapp",
-                "title" : "Application Reason",
-                sortable: true
-            },
-            "col5" : {
-                "field" : "knowledge",
-                "title" : "Knowledge Gained",
-                sortable: true
-            },
-            "col6" : {
-                "field" : "picture",
-                "title" : "Picture",
-                sortable: true
-            }
-        }
-    ];
 
     var operateEvents = {
         'click .remove':(e, value, row, index)=> {
@@ -99,13 +24,9 @@ $(document).ready(()=>{
             $modal.on('show.bs.modal', ()=>{}).modal("show");
             $("#edit_form").submit((event)=>
             {
+                //MAKE DYNAMIC PLS
                 const zip = $('#zip').val();
                 const country = $("#country").val();
-<<<<<<< HEAD
-                console.log(zip + " " + country);
-=======
-                //console.log(zip + " " + country);
->>>>>>> 59c13a4c19c605ca93919a33d7eef218f7187a9e
                 var data = {"zip":zip, "country":country, "oZip":row.zip, "oCountry":row.country};
                 if(zip === "")
                 {
@@ -137,112 +58,56 @@ $(document).ready(()=>{
             });
         }
     };
-<<<<<<< HEAD
-    var data = {'table':'project_hours'};
-    $.ajax(
-    {
-        type: 'POST',
-        url: 'loadtable.php',
-        data: data,
-        success: (response)=>
-        { 
-            console.log(response);
-            $("#message .modal-body").html(response);
-            $modal.on('show.bs.modal',(response)=>{
-            }).modal("show"); 
-            $table.bootstrapTable({
-                contentType:'application/json',
-                data: JSON.parse(response),
-                search: true,
-                pagination: true,
-                buttonsClass: 'primary',
-                showFooter: true,
-                minimumCountColumns: 3,
-                columns: project_hours,
-            });
-        }});
-
-})
-            
-=======
-
-    function createTable(tableNumIndex)
-    {
-        $table = $('.display');
-        // Grab the specific table that you are going to look at
-        var table = tableArray[tableNumIndex];
-    
-        // Table data is the columns for bootstrap
-        var tableData = [];
-        for(var i = 0; i < table["numCols"]; i++)
+    var options = {
+        title: 'options',
+        field: 'options',
+        align: 'center',
+        events: operateEvents,
+        formatter: (response)=>
         {
-            //console.log(table["col"+i]);
-            // Get the column information and push 
-            // the JSON object to the array
-            var col = table["col"+i];
-            tableData.push(col);
+            return [
+                '<button class="btn glyphicon glyphicon-trash remove"></button> ',
+                '<button class="btn glyphicon glyphicon-pencil edit"></button>'
+            ].join('');
         }
-
-        //console.log(tableData);
+    };
     
-        // Push the option buttons to the array
-        tableData.push({
-            title: 'options',
-            field: 'Options',
-            align: 'center',
-            events: operateEvents,
-            formatter: (response)=>
-            {
-                return [
-                    '<button class="btn glyphicon glyphicon-trash remove"></button>',
-                    '<button class="btn glyphicon glyphicon-pencil edit"></button>'
-                ].join('');
-            }
-        });
-
-        //Use this to determine the table used
-        var data = {'table':table["table"]};
-        $.ajax(
+    $('.tablebar').on('click', (e)=>
+    {
+        var data = {'table':e.target.id};
+        if($('#table_head').html() != e.target.innerHTML)
         {
-            type: 'POST',
-            url: '../php/tables/loadtable.php',
-            data: data,
-            success: (response)=>
-            { 
-                //console.log(response);
-                $table.bootstrapTable({
-                    contentType:'application/json',
-                    data: JSON.parse(response),
-                    search: true,
-                    pagination: true,
-                    buttonsClass: 'primary',
-                    showFooter: true,
-                    minimumCountColumns: 3,
-                    columns: tableData,
-                });
-            }
-        });
-    }
-    
-    // Change this so that it works properly idk how but do it
-    $(".clickme").click(function(e){
-        // If there is already a bootstrap table
-        const tableNum = $(this).attr('id');
-        if(tableIndex != tableNum)
-        {
-            if($(".bootstrap-table").length)
+            console.log($('#table_head').html());
+            $('#table_head').text(e.target.innerHTML);
+            if($('.bootstrap-table').length)
             {
-                // Replace it with the original container
                 $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
                 "</table>" +
                 "</div>");
-                $(".clearfix").remove();
+                $(".clearfix").remove();   
             }
-            var buttonString = ".clickme#"+tableNum;
-            $("#table_head").text($(".clickme#"+tableNum).text());
-            tableIndex = tableNum;
-            createTable(tableNum);
+            $table = $('.display');
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '../tables/loadtable.php',
+                    data: data,
+                    success: (response)=>
+                    { 
+                        var r = JSON.parse(response);
+                        r.header[r.header.length] = options;
+                        $table.bootstrapTable({
+                            contentType:'application/json',
+                            data: r.info,
+                            search: true,
+                            pagination: true,
+                            buttonsClass: 'primary',
+                            showFooter: true,
+                            minimumCountColumns: 3,
+                            columns: r.header
+                        });
+                    }
+                });
         }
-    });
+    })
 })
->>>>>>> 59c13a4c19c605ca93919a33d7eef218f7187a9e
