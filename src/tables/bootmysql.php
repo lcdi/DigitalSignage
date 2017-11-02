@@ -9,10 +9,6 @@ require_once("../php/global.php");
 <title>Bootstrap Tutorial</title>
 <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link type="text/css" href="../css/bootstrap-table.css" rel="stylesheet">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-table.js"></script>
-<script src="../js/bootmysql.js"></script>
 <style>
 		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 		.row.content {height: 100%}
@@ -96,6 +92,9 @@ require_once("../php/global.php");
 		</div>
 		
 		
-
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/bootstrap-table.js"></script>
+		<script src="../js/bootmysql.js"></script>
 </body>
 </html>

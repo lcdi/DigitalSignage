@@ -10,14 +10,14 @@ html, body{
     background-color: #eee;
 }
 
-.add-user{
-
-}
-
 .main{
     float: left;
 }
 
 .main #createUser{
     margin-top: 10px;
+}
+
+.form-control{
+    margin-bottom: 5px;
 }
