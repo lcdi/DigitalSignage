@@ -1,9 +1,8 @@
 <?php 
-    require_once 'login.php';
+// To be merged with remove.php and edit.php
     require_once '../DSConn.php';
 	if(isset($_POST['table']))
 	{
-		//echo($_POST['table']);
 		loadTable($_POST['table']);
 	}
 	function loadTable($tableName)

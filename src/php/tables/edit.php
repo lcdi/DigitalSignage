@@ -1,5 +1,5 @@
 <?php
-// Obsolete putting into rowfunctions.php
+// To be merged with loadtable.php and remove.php
     require_once '../DSConn.php';
     
     $sql = new DSConn(); 
@@ -8,19 +8,22 @@
     {
         $tableName = $_POST['table'];
     }
-    
+
     $current = array();
     $where = array();
 
     foreach($_POST as $key => $value)
     {
+        $cleanKey = $sql->make_safe($key)['data'];
+        $cleanValue = $sql->make_safe($value)['data'];
+
         if(substr($key, 0, 2) === 'o_')
         {
-            $where[] = "`".substr($key, 2)."` LIKE '$value'";
+            $where[] = "`".substr($cleanKey, 2)."` LIKE '$cleanValue'";
         }
         else if($key !== 'table')
         {
-            $current[$key] = $value;
+            $current[$cleanKey] = $cleanValue;
         }
     }
 

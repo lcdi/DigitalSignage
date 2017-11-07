@@ -4,13 +4,22 @@ $(document).ready(()=>{
 
     var operateEvents = {
         'click .remove':(e, value, row, index)=> {
+            row['table'] = tableName;
+            // Get the first row value and delete it
+            for(var k in row)
+            {
+                $table.bootstrapTable('removeByUniqueId', row[k]);
+                break;
+            }
             $.ajax({
                 type: 'POST',
                 url: '../php/tables/remove.php',
                 data: row,
                 success: (response)=>
                 {
-                    location.reload();
+                    //location.reload();
+                    
+                    console.log(response);
                 },
                 error: (e)=>
                 {
@@ -24,9 +33,9 @@ $(document).ready(()=>{
             var modelHTML = '<form id="edit_form" action="#">';
             var tableColumns = $table.bootstrapTable("getVisibleColumns");
             var columnNames = new Array();
-            // Probably don't need
             var rowVars = new Array();
 
+            // Get the column names and create an html string that has all of these available
             for(var i = 0; i < tableColumns.length - 1; i++)
             {
                 var columnName = tableColumns[i]['field'];
@@ -48,7 +57,9 @@ $(document).ready(()=>{
 
                 for(var k in rowVars)
                 {
+                    // Assign original database entries to o_ + field
                     data['o_'+k] = rowVars[k];
+                    // Check if a value has been changed and if it has assign it to new otherwise to old
                     if($('#'+k).val() === "")
                     {
                         data[k] = rowVars[k];
@@ -63,6 +74,7 @@ $(document).ready(()=>{
 
                 data['table'] = tableName;
 
+                // If any data is being changed change it otherwise don't
                 if(!changeData)
                 {
                     console.log("No change");
@@ -76,7 +88,7 @@ $(document).ready(()=>{
                         data: data,
                         success:(response)=>
                         {
-                            //location.reload();
+                            console.log(response);
                             $modal.modal("hide");
                             window.onbeforeunload = (e)=> {
                                 // Turning off the event
@@ -140,7 +152,8 @@ $(document).ready(()=>{
                             buttonsClass: 'primary',
                             showFooter: true,
                             minimumCountColumns: 3,
-                            columns: r.header
+                            columns: r.header,
+                            uniqueId: r.header[0].field
                         });
                     }
                 });
