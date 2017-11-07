@@ -1,5 +1,6 @@
 $(document).ready(()=>{
     var $modal = $('#message');
+    var tableName;
 
     var operateEvents = {
         'click .remove':(e, value, row, index)=> {
@@ -20,41 +21,76 @@ $(document).ready(()=>{
             });
         },
         'click .edit': (e, value, row, index)=> {
-            $("#message .modal-body").html('<form id="edit_form" action="#"><div class="form-group"><label for="zip">Zip Code</label><input type="text" class="form-control" id="zip" name="zip" placeholder="'+row.zip+'"></div><label for="country">Country</label><input type="text" class="form-control" id="country" name="country" placeholder="'+row.country+'"></div><button type="submit" class="btn btn-primary">Submit</button></form>');
+            var modelHTML = '<form id="edit_form" action="#">';
+            var tableColumns = $table.bootstrapTable("getVisibleColumns");
+            var columnNames = new Array();
+            // Probably don't need
+            var rowVars = new Array();
+
+            for(var i = 0; i < tableColumns.length - 1; i++)
+            {
+                var columnName = tableColumns[i]['field'];
+                columnNames.push(columnName);
+                rowVars[columnName] = row[columnName];
+
+                modelHTML += '<div class="form-group"><label for="' + columnName +'">' + capitalizeFirstLetter(columnName) + 
+                    '</label><input type="text" class="form-control" id="' + columnName + 
+                    '" name="' + columnName + '" placeholder="' + row[columnName] + '"></div>';
+            }
+
+            modelHTML += '<button type="submit" class="btn btn-primary">Submit</button></form>';
+            $("#message .modal-body").html(modelHTML);
             $modal.on('show.bs.modal', ()=>{}).modal("show");
             $("#edit_form").submit((event)=>
             {
-                //MAKE DYNAMIC PLS
-                const zip = $('#zip').val();
-                const country = $("#country").val();
-                var data = {"zip":zip, "country":country, "oZip":row.zip, "oCountry":row.country};
-                if(zip === "")
+                var data = {};
+                var changeData = false;
+
+                for(var k in rowVars)
                 {
-                    data.zip = row.zip;
-                }
-                if(country === "")
-                {
-                    data.country = row.country;
-                }
-                $.ajax({
-                    type: 'POST',
-                    url: '../php/tables/edit.php',
-                    data: data,
-                    success:(response)=>
+                    data['o_'+k] = rowVars[k];
+                    if($('#'+k).val() === "")
                     {
-                        location.reload();
-                        window.onbeforeunload = (e)=> {
-                            // Turning off the event
-                            e.preventDefault();
-                        }
-                    },
-                    error: (e)=>
-                    {
-                        $("#message .modal-body").html(e);
-                        $modal.on('show.bs.modal',(e)=>{
-                        }).modal("show"); 
+                        data[k] = rowVars[k];
                     }
-                })
+                    else
+                    {
+                        changeData = true;
+                        data[k] = $('#'+k).val();
+                        $table.bootstrapTable('updateCell', {'index': index, 'field':k, 'value':$('#'+k).val()});
+                    }
+                }
+
+                data['table'] = tableName;
+
+                if(!changeData)
+                {
+                    console.log("No change");
+                    event.preventDefault();
+                }
+                else {
+                    event.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url: '../php/tables/edit.php',
+                        data: data,
+                        success:(response)=>
+                        {
+                            //location.reload();
+                            $modal.modal("hide");
+                            window.onbeforeunload = (e)=> {
+                                // Turning off the event
+                                e.preventDefault();
+                            }
+                        },
+                        error: (e)=>
+                        {
+                            $("#message .modal-body").html(e);
+                            $modal.on('show.bs.modal',(e)=>{
+                            }).modal("show"); 
+                        }
+                    })
+                }
             });
         }
     };
@@ -74,10 +110,10 @@ $(document).ready(()=>{
     
     $('.tablebar').on('click', (e)=>
     {
-        var data = {'table':e.target.id};
+        tableName = e.target.id;
+        var data = {'table':tableName};
         if($('#table_head').html() != e.target.innerHTML)
         {
-            console.log($('#table_head').html());
             $('#table_head').text(e.target.innerHTML);
             if($('.bootstrap-table').length)
             {
@@ -94,9 +130,7 @@ $(document).ready(()=>{
                     data: data,
                     success: (response)=>
                     { 
-                        console.log(response);
                         var r = JSON.parse(response);
-                        console.log(r);
                         r.header[r.header.length] = options;
                         $table.bootstrapTable({
                             contentType:'application/json',
@@ -111,5 +145,9 @@ $(document).ready(()=>{
                     }
                 });
         }
-    })
+    });
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 })

@@ -1,25 +1,35 @@
 <?php
 // Obsolete putting into rowfunctions.php
-    require_once 'login.php';
-    require_once '../php/sanitize.php';
-    $conn = new mysqli($hn,$un,$pw,$db);
-    if($conn->connect_error) die($conn->connect_error);
+    require_once '../DSConn.php';
     
-    if (isset($_POST['zip']) && isset($_POST['country']) &&
-        isset($_POST['oZip']) && isset($_POST['oCountry']))
+    $sql = new DSConn(); 
+    $tableName = '';
+    if(isset($_POST['table']))
     {
-        $zip = santitizeMySQL($conn, $_POST['zip']);
-        $country = santitizeMySQL($conn, $_POST['country']);
-        $oZip = $_POST['oZip'];
-        $oCountry = $_POST['oCountry'];
-        $query = "UPDATE weather SET zip='$zip', country='$country' WHERE zip LIKE '$oZip' AND country LIKE '$oCountry'";
-        $result = $conn->query($query);
-        
-    }else
-    {
-        echo($_POST['zip'] . $_POST['country'] . $_POST['key']);
-        die("Query Fail\n" . $_POST['zip']);
+        $tableName = $_POST['table'];
     }
-    $conn->close();
-    echo("Successful Query!\n");
+    
+    $current = array();
+    $where = array();
+
+    foreach($_POST as $key => $value)
+    {
+        if(substr($key, 0, 2) === 'o_')
+        {
+            $where[] = "`".substr($key, 2)."` LIKE '$value'";
+        }
+        else if($key !== 'table')
+        {
+            $current[$key] = $value;
+        }
+    }
+
+    if($sql->update($tableName, $current, join(" AND ", $where))['success'])
+    {
+        echo "Query Successful";
+    }
+    else
+    {
+        echo "Query Failed";
+    }
 ?>
