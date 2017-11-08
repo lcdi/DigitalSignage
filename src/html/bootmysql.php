@@ -1,7 +1,6 @@
 <?php
 
 require_once("../php/global.php");
-
 if(!isset($_SESSION['user']))
 {
 	//redirect_to("../../index.php?to=src/html/bootmysql.php");
@@ -19,10 +18,10 @@ if(!isset($_SESSION['user']))
 <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="../css/general.css">
 <link type="text/css" rel="stylesheet" href="../css/bootstrap-table.css">
-		
+
 </head>
 <body>
-				
+
     <div class="container-fluid">
         <div class="row content">
             <div class="col-sm-2 sidenav hidden-xs">
@@ -45,7 +44,14 @@ if(!isset($_SESSION['user']))
                 </nav>
                 <div class="page-header">
                     <h1 id="table_head">Data Table</h1>
+																				<!-- ADD Button option 1 -->
+										<form action="add.php">
+  									<input type="image" src="https://i.imgur.com/MY8LiKi.png" class="img-rounded" alt="Add" width="25" height="25">
+										</form>
+																				<!-- ADD Button option 2 -->
+										<button class="btn glyphicon glyphicon-plus add"></button>
                     <table 	id="table" class="display" data-show-columns="true" data-height="600"></table>
+
                 </div>
             </div>
         </div>
@@ -53,7 +59,7 @@ if(!isset($_SESSION['user']))
 					<!-- Modal -->
     <div class="modal fade" id="message" role="dialog">
 			<div class="modal-dialog">
-			
+
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
@@ -66,11 +72,11 @@ if(!isset($_SESSION['user']))
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
-		
-		
+
+
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="../js/bootstrap-table.js"></script>
