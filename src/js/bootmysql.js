@@ -3,29 +3,48 @@ $(document).ready(()=>{
     var tableName;
 
     var operateEvents = {
-        'click .remove':(e, value, row, index)=> {
-            row['table'] = tableName;
-            // Get the first row value and delete it
-            for(var k in row)
-            {
-                $table.bootstrapTable('removeByUniqueId', row[k]);
-                break;
-            }
+      'click .remove':(e, value, row, index)=> {
+          row['table'] = tableName;
+          // Get the first row value and delete it
+          for(var k in row)
+          {
+              $table.bootstrapTable('removeByUniqueId', row[k]);
+              break;
+          }
+          $.ajax({
+              type: 'POST',
+              url: '../php/tables/remove.php',
+              data: row,
+              success: (response)=>
+              {
+                  //location.reload();
+
+                  console.log(response);
+              },
+              error: (e)=>
+              {
+                  $("#message .modal-body").html(e);
+                  $modal.on('show.bs.modal',(e)=>{
+                  }).modal("show");
+              }
+          });
+      },
+      //Placeholder for actual click code
+        'click .add':(e, value, row, index)=> {
             $.ajax({
                 type: 'POST',
-                url: '../php/tables/remove.php',
+                url: '../html/add.php',
                 data: row,
                 success: (response)=>
                 {
-                    //location.reload();
-                    
                     console.log(response);
+                    //location.reload();
                 },
                 error: (e)=>
                 {
                     $("#message .modal-body").html(e);
                     $modal.on('show.bs.modal',(e)=>{
-                    }).modal("show"); 
+                    }).modal("show");
                 }
             });
         },
@@ -42,8 +61,8 @@ $(document).ready(()=>{
                 columnNames.push(columnName);
                 rowVars[columnName] = row[columnName];
 
-                modelHTML += '<div class="form-group"><label for="' + columnName +'">' + capitalizeFirstLetter(columnName) + 
-                    '</label><input type="text" class="form-control" id="' + columnName + 
+                modelHTML += '<div class="form-group"><label for="' + columnName +'">' + capitalizeFirstLetter(columnName) +
+                    '</label><input type="text" class="form-control" id="' + columnName +
                     '" name="' + columnName + '" placeholder="' + row[columnName] + '"></div>';
             }
 
@@ -99,12 +118,13 @@ $(document).ready(()=>{
                         {
                             $("#message .modal-body").html(e);
                             $modal.on('show.bs.modal',(e)=>{
-                            }).modal("show"); 
+                            }).modal("show");
                         }
                     })
                 }
             });
         }
+
     };
     var options = {
         title: 'options',
@@ -114,12 +134,13 @@ $(document).ready(()=>{
         formatter: (response)=>
         {
             return [
+                //'<button class="btn glyphicon glyphicon-plus add"></button>',
                 '<button class="btn glyphicon glyphicon-trash remove"></button> ',
                 '<button class="btn glyphicon glyphicon-pencil edit"></button>'
             ].join('');
         }
     };
-    
+
     $('.tablebar').on('click', (e)=>
     {
         tableName = e.target.id;
@@ -132,7 +153,7 @@ $(document).ready(()=>{
                 $(".bootstrap-table").replaceWith("<table id='table' class='display' data-show-columns='true' data-height='600'>" +
                 "</table>" +
                 "</div>");
-                $(".clearfix").remove();   
+                $(".clearfix").remove();
             }
             $table = $('.display');
             $.ajax(
@@ -141,7 +162,7 @@ $(document).ready(()=>{
                     url: '../php/tables/loadtable.php',
                     data: data,
                     success: (response)=>
-                    { 
+                    {
                         var r = JSON.parse(response);
                         r.header[r.header.length] = options;
                         $table.bootstrapTable({
@@ -152,8 +173,7 @@ $(document).ready(()=>{
                             buttonsClass: 'primary',
                             showFooter: true,
                             minimumCountColumns: 3,
-                            columns: r.header,
-                            uniqueId: r.header[0].field
+                            columns: r.header
                         });
                     }
                 });
