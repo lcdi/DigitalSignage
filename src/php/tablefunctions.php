@@ -16,7 +16,11 @@ if(isset($_POST['function']) && isset($_POST['table']))
         case 'load':
             loadTable($tableName);
             break;
+        case 'add':
+            addRow($tableName);
+            break;
         default:
+            echo "Wrong function name";
             break;
     }
 }
@@ -92,5 +96,21 @@ function loadTable($tableName)
     }
     $response["info"] = $info;
     die (json_encode($response));
+}
+
+function addRow($tableName)
+{
+    $sql = new DSConn();
+    $data = array();
+
+    foreach($_POST as $key => $value)
+    {
+        if(!($key == 'table' || $key == 'function'))
+        {
+            $cleanKey = $sql->make_safe($key)['data'];
+            $cleanValue = $sql->make_safe($value)['data'];
+            $data[$cleanKey] = $cleanValue;
+        }
+    }
 }
 ?>

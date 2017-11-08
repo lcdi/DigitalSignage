@@ -44,12 +44,7 @@ if(!isset($_SESSION['user']))
                 </nav>
                 <div class="page-header">
                     <h1 id="table_head">Data Table</h1>
-																				<!-- ADD Button option 1 -->
-										<form action="add.php">
-  									<input type="image" src="https://i.imgur.com/MY8LiKi.png" class="img-rounded" alt="Add" width="25" height="25">
-										</form>
-																				<!-- ADD Button option 2 -->
-										<button class="btn glyphicon glyphicon-plus add"></button>
+					    <button class="btn glyphicon glyphicon-plus add"></button>
                     <table 	id="table" class="display" data-show-columns="true" data-height="600"></table>
 
                 </div>

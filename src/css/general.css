@@ -12,3 +12,7 @@ html, body{
 .main #createUser{
     margin-top: 10px;
 }
+
+#error_text {
+    color:red;
+}

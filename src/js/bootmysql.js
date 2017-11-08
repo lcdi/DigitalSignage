@@ -1,6 +1,7 @@
 $(document).ready(()=>{
     var $modal = $('#message');
     var tableName;
+    $('.add').hide();
 
     var operateEvents = {
         'click .remove':(e, value, row, index)=> {
@@ -16,30 +17,6 @@ $(document).ready(()=>{
                 type: 'POST',
                 url: '../php/tablefunctions.php',
                 data: row,
-                success: (response)=>
-                {
-                    console.log(response);
-                    //location.reload();
-                },
-                error: (e)=>
-                {
-                    $("#message .modal-body").html(e);
-                    $modal.on('show.bs.modal',(e)=>{
-                    }).modal("show");
-                }
-            });
-        },
-        //Placeholder for actual click code
-        'click .add':(e, value, row, index)=> {
-            $.ajax({
-                type: 'POST',
-                url: '../html/add.php',
-                data: row,
-                success: (response)=>
-                {
-                    console.log(response);
-                    //location.reload();
-                },
                 error: (e)=>
                 {
                     $("#message .modal-body").html(e);
@@ -51,7 +28,9 @@ $(document).ready(()=>{
         'click .edit': (e, value, row, index)=> {
             var modelHTML = '<form id="edit_form" action="#">';
             var tableColumns = $table.bootstrapTable("getVisibleColumns");
+            // Assoc array of table column names - options
             var columnNames = new Array();
+            // Assoc array of column => data from specific row
             var rowVars = new Array();
 
             // Get the column names and create an html string that has all of these available
@@ -109,12 +88,7 @@ $(document).ready(()=>{
                         data: data,
                         success:(response)=>
                         {
-                            console.log(response);
                             $modal.modal("hide");
-                            window.onbeforeunload = (e)=> {
-                                // Turning off the event
-                                e.preventDefault();
-                            }
                         },
                         error: (e)=>
                         {
@@ -128,6 +102,7 @@ $(document).ready(()=>{
         }
 
     };
+
     var options = {
         title: 'options',
         field: 'options',
@@ -136,7 +111,6 @@ $(document).ready(()=>{
         formatter: (response)=>
         {
             return [
-                //'<button class="btn glyphicon glyphicon-plus add"></button>',
                 '<button class="btn glyphicon glyphicon-trash remove"></button> ',
                 '<button class="btn glyphicon glyphicon-pencil edit"></button>'
             ].join('');
@@ -169,6 +143,7 @@ $(document).ready(()=>{
                     {
                         var r = JSON.parse(response);
                         r.header[r.header.length] = options;
+                        $('.add').show();
                         $table.bootstrapTable({
                             contentType:'application/json',
                             data: r.info,
@@ -177,11 +152,82 @@ $(document).ready(()=>{
                             buttonsClass: 'primary',
                             showFooter: true,
                             minimumCountColumns: 3,
-                            columns: r.header
+                            columns: r.header,
+                            uniqueId: r.header[0]['field']
                         });
                     }
                 });
         }
+    });
+
+    $('.add').on('click', (e) =>
+    {
+        var modelHTML = '<form id="add_form" action="#">';
+        var tableColumns = $table.bootstrapTable("getVisibleColumns");
+        var columnNames = new Array();
+
+        for(var i = 0; i < tableColumns.length - 1; i++)
+        {
+            var columnName = tableColumns[i]['field'];
+            columnNames.push(columnName);
+
+            modelHTML += '<div class="form-group"><label for="' + columnName + '">' + capitalizeFirstLetter(columnName) +
+                '</label><input type="text" class="form-control" id="' + columnName + 
+                '" name="' + columnName + '"></div>';
+        }
+
+        modelHTML += '<button type="submit" class="btn btn-primary">Submit</button></form><p id="error_text"></p>';
+        $("#message .modal-body").html(modelHTML);
+        $modal.on('show.bs.modal', ()=>{}).modal("show");
+
+        $("#add_form").submit((event)=>
+        {
+            var inputOkay = true;
+            var addData = {};
+
+            for(var i = 0; i < columnNames.length; i++)
+            {
+                if($("#"+columnNames[i]).val() === '')
+                {
+                    inputOkay = false;
+                    break;
+                }
+                else
+                {
+                    addData[columnNames[i]] = $("#"+columnNames[i]).val();
+                }
+            }
+
+            if(inputOkay)
+            {
+                // You might not be able to delete the row
+                $table.bootstrapTable("append", [addData]);
+                $('#error_text').text("");
+                addData['function'] = 'add';
+                addData['table'] = tableName;
+                $.ajax({
+                    type: 'POST',
+                    url: '../php/tablefunctions.php',
+                    data: addData,
+                    success: (response) =>
+                    {
+                        $modal.modal("hide");
+                    },
+                    error: (e) =>
+                    {
+                        $("#message .modal-body").html(e);
+                        $modal.on('show.bs.modal',(e)=>{
+                        }).modal("show");
+                    }
+                });
+            }
+            else
+            {
+                $('#error_text').text("Please input all fields");
+            }
+
+            event.preventDefault();
+        });
     });
 
     function capitalizeFirstLetter(string) {
