@@ -164,8 +164,10 @@ $(document).ready(()=>{
     {
         var modelHTML = '<form id="add_form" action="#">';
         var tableColumns = $table.bootstrapTable("getVisibleColumns");
+        // Name of table columns
         var columnNames = new Array();
 
+        // Add the text fields to modalHTML
         for(var i = 0; i < tableColumns.length - 1; i++)
         {
             var columnName = tableColumns[i]['field'];
@@ -176,6 +178,7 @@ $(document).ready(()=>{
                 '" name="' + columnName + '"></div>';
         }
 
+        // Add button and error text to modal and show it
         modelHTML += '<button type="submit" class="btn btn-primary">Submit</button></form><p id="error_text"></p>';
         $("#message .modal-body").html(modelHTML);
         $modal.on('show.bs.modal', ()=>{}).modal("show");
@@ -189,18 +192,19 @@ $(document).ready(()=>{
             {
                 if($("#"+columnNames[i]).val() === '')
                 {
+                    // A field is empty so it can't be submitted
                     inputOkay = false;
                     break;
                 }
                 else
                 {
+                    // Add fields that aren't empty to data array
                     addData[columnNames[i]] = $("#"+columnNames[i]).val();
                 }
             }
 
             if(inputOkay)
             {
-                // You might not be able to delete the row
                 $table.bootstrapTable("append", [addData]);
                 $('#error_text').text("");
                 addData['function'] = 'add';
@@ -223,6 +227,7 @@ $(document).ready(()=>{
             }
             else
             {
+                // Text to be shown on error
                 $('#error_text').text("Please input all fields");
             }
 
