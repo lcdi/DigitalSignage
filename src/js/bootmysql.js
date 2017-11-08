@@ -5,6 +5,7 @@ $(document).ready(()=>{
     var operateEvents = {
         'click .remove':(e, value, row, index)=> {
             row['table'] = tableName;
+            row['function'] = 'remove';
             // Get the first row value and delete it
             for(var k in row)
             {
@@ -13,12 +14,10 @@ $(document).ready(()=>{
             }
             $.ajax({
                 type: 'POST',
-                url: '../php/tables/remove.php',
+                url: '../php/tablefunctions.php',
                 data: row,
                 success: (response)=>
                 {
-                    //location.reload();
-                    
                     console.log(response);
                 },
                 error: (e)=>
@@ -47,6 +46,7 @@ $(document).ready(()=>{
                     '" name="' + columnName + '" placeholder="' + row[columnName] + '"></div>';
             }
 
+            // Add submit button to modal and show it
             modelHTML += '<button type="submit" class="btn btn-primary">Submit</button></form>';
             $("#message .modal-body").html(modelHTML);
             $modal.on('show.bs.modal', ()=>{}).modal("show");
@@ -73,6 +73,7 @@ $(document).ready(()=>{
                 }
 
                 data['table'] = tableName;
+                data['function'] = 'edit';
 
                 // If any data is being changed change it otherwise don't
                 if(!changeData)
@@ -84,7 +85,7 @@ $(document).ready(()=>{
                     event.preventDefault();
                     $.ajax({
                         type: 'POST',
-                        url: '../php/tables/edit.php',
+                        url: '../php/tablefunctions.php',
                         data: data,
                         success:(response)=>
                         {
@@ -135,10 +136,12 @@ $(document).ready(()=>{
                 $(".clearfix").remove();   
             }
             $table = $('.display');
+            data['function'] = 'load';
+
             $.ajax(
                 {
                     type: 'POST',
-                    url: '../php/tables/loadtable.php',
+                    url: '../php/tablefunctions.php',
                     data: data,
                     success: (response)=>
                     { 
