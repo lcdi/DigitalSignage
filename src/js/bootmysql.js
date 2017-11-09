@@ -73,7 +73,7 @@ $(document).ready(()=>{
 
                 data['table'] = tableName;
                 data['function'] = 'edit';
-
+                
                 // If any data is being changed change it otherwise don't
                 if(!changeData)
                 {
@@ -82,13 +82,17 @@ $(document).ready(()=>{
                 }
                 else {
                     event.preventDefault();
+                    
                     $.ajax({
                         type: 'POST',
                         url: '../php/tablefunctions.php',
                         data: data,
                         success:(response)=>
                         {
-                            $modal.modal("hide");
+                            //$modal.modal("hide");
+                            $("#message .modal-body").html(e);
+                            $modal.on('show.bs.modal',(e)=>{
+                            }).modal("show");
                         },
                         error: (e)=>
                         {
@@ -119,8 +123,8 @@ $(document).ready(()=>{
 
     $('.tablebar').on('click', (e)=>
     {
-        tableName = e.target.id;
-        var data = {'table':tableName};
+        tableName = e.target.id; //get the name of the table
+        var data = {'table':tableName}; //sets table name
         if($('#table_head').html() != e.target.innerHTML)
         {
             $('#table_head').text(e.target.innerHTML);
@@ -133,7 +137,14 @@ $(document).ready(()=>{
             }
             $table = $('.display');
             data['function'] = 'load';
-
+            /********************************************
+             * In order for the AJAX call properly,     *
+             * the data variable must be sent as such...*
+             *                                          *
+             * data                                     *
+             *   ->table                                *
+             *   ->function                             *
+            *********************************************/
             $.ajax(
                 {
                     type: 'POST',
@@ -141,8 +152,26 @@ $(document).ready(()=>{
                     data: data,
                     success: (response)=>
                     {
+                        /********************************************
+                         * the response from the server will be     *
+                         * the following package of information     *
+                         *                                          *
+                         * repsonse                                 *
+                         *   ->header                               *
+                         *       (for each column)                  *
+                         *       ->field                            *
+                         *       ->title                            *
+                         *       ->sortable                         *
+                         *   ->info                                 *
+                         *       (for each row)                     *    
+                         *       ->row info                         *
+                        *********************************************/
+                        $("#message .modal-body").html(response);
+                        $modal.on('show.bs.modal',(response)=>{
+                        }).modal("show");
                         var r = JSON.parse(response);
                         r.header[r.header.length] = options;
+                        console.log(r.header[0]['field']);
                         $('.add').show();
                         $table.bootstrapTable({
                             contentType:'application/json',
@@ -202,13 +231,14 @@ $(document).ready(()=>{
                     addData[columnNames[i]] = $("#"+columnNames[i]).val();
                 }
             }
-
+            console.log(addData);
             if(inputOkay)
             {
                 $table.bootstrapTable("append", [addData]);
                 $('#error_text').text("");
                 addData['function'] = 'add';
                 addData['table'] = tableName;
+                console.log(addData);
                 $.ajax({
                     type: 'POST',
                     url: '../php/tablefunctions.php',

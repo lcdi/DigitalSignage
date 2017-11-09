@@ -1,7 +1,6 @@
 <?php
 require_once("global.php");
 require_once("DSConn.php");
-
 if(isset($_POST['function']) && isset($_POST['table']))
 {
     $tableName = $_POST['table'];
@@ -23,7 +22,7 @@ if(isset($_POST['function']) && isset($_POST['table']))
             echo "Wrong function name";
             break;
     }
-}
+}else{die("FUNCTION NAME AND TABLE NOT SET");}
 function removeRow($tableName)
 {
     $sql = new DSConn();
@@ -110,7 +109,9 @@ function addRow($tableName)
             $cleanKey = $sql->make_safe($key)['data'];
             $cleanValue = $sql->make_safe($value)['data'];
             $data[$cleanKey] = $cleanValue;
+
         }
     }
+    $sql->insert($tableName, $data);   
 }
 ?>
