@@ -22,7 +22,12 @@ if(isset($_POST['function']) && isset($_POST['table']))
             echo "Wrong function name";
             break;
     }
-}else{die("FUNCTION NAME AND TABLE NOT SET");}
+}
+else
+{
+    die("FUNCTION NAME AND TABLE NOT SET");
+}
+
 function removeRow($tableName)
 {
     $sql = new DSConn();

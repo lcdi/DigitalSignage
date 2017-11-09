@@ -22,7 +22,7 @@ if(!isset($_SESSION['user']))
         <h2><img class="img-thumbnail" src="https://lcdiblog.champlain.edu/wp-content/uploads/sites/11/2013/11/LCDI.png"></h2>
         <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="adminlanding.php">Dashboard</a></li>
-            <li><a href="bootmysql.php">Tables</a></li>
+            <li><a href="tables.php">Tables</a></li>
             <li><a href="#section3">Something else</a></li>
             <li><a href="#section3">Something elses</a></li>
         </ul><br>
