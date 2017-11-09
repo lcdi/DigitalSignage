@@ -152,6 +152,7 @@ $(document).ready(()=>{
                     data: data,
                     success: (response)=>
                     {
+                        console.log(response);
                         /********************************************
                          * the response from the server will be     *
                          * the following package of information     *

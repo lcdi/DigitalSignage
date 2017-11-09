@@ -20,7 +20,7 @@ if(!(empty($_POST['uname']) || empty($_POST['psw'])))
             redirect_to($_GET['to']);
         }
         else{
-            redirect_to("src/landing/adminlanding.php");
+            redirect_to("src/html/adminlanding.php");
         }
     }
     else
