@@ -166,9 +166,6 @@ $(document).ready(()=>{
                          *       (for each row)                     *    
                          *       ->row info                         *
                         *********************************************/
-                        $("#message .modal-body").html(response);
-                        $modal.on('show.bs.modal',(response)=>{
-                        }).modal("show");
                         var r = JSON.parse(response);
                         r.header[r.header.length] = options;
                         console.log(r.header[0]['field']);
