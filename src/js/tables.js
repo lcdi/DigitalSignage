@@ -168,8 +168,28 @@ $(document).ready(()=>{
                          *       ->row info                         *
                         *********************************************/
                         var r = JSON.parse(response);
+                        /*
+                         *  If the table is the student table
+                         *  Check each rows picture if it's a direct link
+                         *  If it's a direct link make it show as an image in HTML
+                         */
+                        if(tableName == 'student')
+                        {
+                            for(var i = 0; i < r.info.length; i++)
+                            {
+                                var subString = r.info[i]['picture'].slice(-4);
+                                if(subString == ".jpg" || subString == ".png")
+                                {
+                                    r.info[i]['picture']='<img src="'+r.info[i]['picture']+'" class="img-responsive" width="100" height="100">';
+                                }
+                            }
+                        }
                         r.header[r.header.length] = options;
-                        console.log(r.header[0]['field']);
+                        // Capitalize the first letter of each title of each column
+                        for(var i = 0; i < r.header.length; i++)
+                        {
+                            r.header[i]['title'] = capitalizeFirstLetter(r.header[i]['title']);
+                        }
                         $('.add').show();
                         $table.bootstrapTable({
                             contentType:'application/json',
