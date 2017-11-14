@@ -42,14 +42,14 @@ if(!(empty($_POST['uname']) || empty($_POST['psw'])))
     <div class="form-signin">
         <form method="POST" action="">
 
-        <h2 class="signin-heading">Please Sign In</h2>
-        <label for="inputUsername"><b>Username</b></label>
-        <input type="username" placeholder="Enter Username" name="uname" class="form-control" value="<?php echo isset($_POST['uname']) ? $_POST['uname'] : ''?>"autofocus>
+            <h2 class="signin-heading">Please Sign In</h2>
+            <label for="inputUsername"><b>Username</b></label>
+            <input type="username" placeholder="Enter Username" name="uname" class="form-control" value="<?php echo isset($_POST['uname']) ? $_POST['uname'] : ''?>"autofocus>
 
-        <label for="inputPassword"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" class="form-control">
-        <button type="submit" class="btn btn-lg btn-primary btn-block" id="login">Login</button>
-        <p id="responseText"><?php echo $response?></p>
+            <label for="inputPassword"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" class="form-control">
+            <button type="submit" class="btn btn-lg btn-primary btn-block" id="login">Login</button>
+            <p id="responseText"><?php echo $response?></p>
 
         </form>
     </div>

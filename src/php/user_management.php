@@ -1,6 +1,19 @@
 <?php
 require_once("global.php");
 
+// Return true if account on server
+function authenticate($username, $password)
+{
+    $sql = new DSConn();
+    if(userExist($username))
+    {
+        $result = $sql->get_assoc("users", array("passwordhash"), "username like '$username'");
+        return password_verify($password, $result['data'][0]["passwordhash"]);
+    }
+
+    return false;
+}
+
 // Changes password after verification
 function changePassword($username, $oldPassword, $newPassword1, $newPassword2)
 {
@@ -20,27 +33,6 @@ function changePassword($username, $oldPassword, $newPassword1, $newPassword2)
     $data = array("passwordhash"=>$newPassword1);
     $sql->update("users", $data, "username LIKE '$username'");
     $result['success'] = true;
-    return $result;
-}
-
-// Reset password of given username to default password
-function resetPassword($username)
-{
-    $sql = new DSConn();
-    $result = array('success'=>true);
-    $password = DEFAULT_PASSWORD;
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
-    if(userExist($username))
-    {
-         $data = array("passwordhash"=>$password);
-         $sql->update("users", $data,"username LIKE '$username'");
-         $result['success'] = true;
-    }
-    else
-    {
-        $result['error'] = 'User doesn\'t exist';
-    }
     return $result;
 }
 
@@ -82,21 +74,31 @@ function removeUser($username)
     }
     else
     {
-        $result['error'] = "User doesn\'t exist";
+        $result['error'] = "User doesn't exist";
     }
+
+    return $result;
 }
 
-// Return true if account on server
-function authenticate($username, $password)
+// Reset password of given username to default password
+function resetPassword($username)
 {
     $sql = new DSConn();
+    $result = array('success'=>true);
+    $password = DEFAULT_PASSWORD;
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
     if(userExist($username))
     {
-        $result = $sql->get_assoc("users", array("passwordhash"), "username like '$username'");
-        return password_verify($password, $result['data'][0]["passwordhash"]);
+         $data = array("passwordhash"=>$password);
+         $sql->update("users", $data,"username LIKE '$username'");
+         $result['success'] = true;
     }
-
-    return false;
+    else
+    {
+        $result['error'] = 'User doesn\'t exist';
+    }
+    return $result;
 }
 
 // Return true if user in database
