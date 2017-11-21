@@ -6,7 +6,7 @@
 *  ->Update apps, which sends the server the new information about the apps
 *  ->Modal that allows the changing of min/max of app's height/width
 *  ->Allows to view to displays
-*  ->Allows to change background
+*  ->Allows to change background and resize background
 *  ->Shows off widgets
 */
 $(document).ready(()=>{
@@ -21,7 +21,10 @@ $(document).ready(()=>{
             return(editor.ratio() * editor.width())
         },
         /*Must be completed*/
-        resize: ()=>{$editor.height(editor.height())},
+        resize: ()=>{
+            $editor.height(editor.height())
+            //Resize apps
+        },
         startup: ()=>{
             $editor.height(editor.height());
             var AppData = requestAppDetails();
@@ -102,18 +105,34 @@ function generateApp(app, editor)
     var editorApp = {name: app['app_name'], div: $div[0]};
     return(editorApp)
 }
+/*
+* calculates an app's x-axis property to fit within editor or resized for editor
+* as the app is been intergrated in the editor. 
+*/
 function calcXIn(app, editor)
 {
     return((app*editor)/1920);
 }
+/*
+* calculates an app's y-axis property to fit within editor or resized for editor
+* as the app is been intergrated in the editor. 
+*/
 function calcYIn(app, editor)
 {
     return((app*editor)/1080);
 }
+/*
+* calculates an app's x-axis property to fit within editor or resized for editor
+* as the app's inforamtion is being posted to the server. 
+*/
 function calcXOut(app, editor)
 {
     return((app*1920)/editor)
 }
+/*
+* calculates an app's y-axis property to fit within editor or resized for editor
+* as the app's inforamtion is being posted to the server. 
+*/
 function calcYout(app, editor)
 {
     return((app*1080)/editor);
