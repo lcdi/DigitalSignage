@@ -9,6 +9,8 @@
 *  ->Allows to change background and resize background
 *  ->Shows off widgets
 */
+
+//RESIZE IS BROKEN
 $(document).ready(()=>{
     var $modal = $('#message');
     var $apps = $('.draggable');
