@@ -11,36 +11,76 @@
 */
 $(document).ready(()=>{
     var $modal = $('#message');
-    $editor = $('#display-editor');
+    var $apps = $('.draggable');
+    var $editor = $('#display-editor');
     var editor = {
         apps: [],
         ratio: ()=>{return (9/16)},
         width: ()=>{return $editor.width()},
         height: ()=>{
-            console.log(editor.ratio() * editor.width())
+            //console.log(editor.ratio() * editor.width())
             return(editor.ratio() * editor.width())
         },
-        /*Must be completed*/
-        resize: ()=>{
-            $editor.height(editor.height())
-            //Resize apps
+        resize: (height)=>{
+            $editor.height(editor.height());
+            for(i = 0; i < editor.apps.length; i++)
+            {
+                $('#'+editor.apps[i].app_name).css({
+                    'left': calcXIn(editor.apps[i].from_left, editor.width()),
+                    'width': calcXIn(editor.apps[i].width, editor.width()),
+                    'top': calcYIn(editor.apps[i].from_top, editor.height()),
+                    'height': calcYIn(editor.apps[i].height, editor.height())
+                }).resizable({
+                    minWidth: calcXIn(editor.apps[i].min_width, editor.width()),
+                    maxWidth: calcXIn(editor.apps[i].max_width,  editor.width()),
+                    minHeight: calcYIn(editor.apps[i].min_height, editor.height()),
+                    maxHeight: calcYIn(editor.apps[i].max_height, editor.height()),
+                    cancel: ".cancel", 
+                    aspectRatio: true
+                });
+            }
+            
         },
         startup: ()=>{
             $editor.height(editor.height());
             var AppData = requestAppDetails();
-            
-                for(i = 0; i < AppData.app.length; i++)
-                {
-                    editor.apps[editor.apps.length] = generateApp(AppData.app[i], editor);
-                }
-                console.log(editor.apps);
-                $( ".draggable" ).draggable({containment: "parent"}).resizable({cancel: ".cancel", aspectRatio: true});
+            editor.apps = AppData.app;
+            for(i = 0; i < editor.apps.length; i++)
+            {
+                generateApp(editor.apps[i], editor);
+            }
+            $('.draggable').draggable({
+                containment: "parent",
+                stop: function( e, ui ) {
+                    for(i = 0; i < editor.apps.length; i++)
+                    {
+                        if(ui.helper[0].id === editor.apps[i].app_name)
+                        {
+                            editor.apps[i].from_top = calcYOut(ui.position.top, editor.height());
+                            editor.apps[i].from_left = calcXOut(ui.position.left, editor.width());
+                        }
+                    }
+                },
+            }).resizable({
+                aspectRatio: true,
+                cancel: ".cancel",
+                stop: (e, ui)=>{
+                    for(i = 0; i < editor.apps.length; i++)
+                    {
+                        if(ui.helper[0].id === editor.apps[i].app_name)
+                        {
+                            editor.apps[i].height = calcYOut(ui.size.height, editor.height());
+                            editor.apps[i].width = calcXOut(ui.size.width, editor.width());
+                        }
+                    }
+                }});
         }
     }
     editor.startup();
-    editor.resize();
-    $(window).on('resize', ()=>{editor.resize()});
-
+    //editor.resize();
+    $(window).on('resize', ()=>{
+        editor.resize($editor.height())
+    });
 function requestAppDetails()
 {
     var req = $.ajax({
@@ -53,7 +93,6 @@ function requestAppDetails()
         },
         async: false
     });
-    console.log(req.responseText)
     return JSON.parse(req.responseText);
 }
 /*
@@ -76,13 +115,13 @@ function generateApp(app, editor)
                     $div.css('left', calcXIn(value, editor.width()));
                     break;
                 case 'from_top':
-                    $div.css('top', calcYin(value, editor.height()));
+                    $div.css('top', calcYIn(value, editor.height()));
                     break;
                 case 'width':
                     $div.css('width', calcXIn(value, editor.width()));
                     break;
                 case 'height':
-                    $div.css('height', calcYin(value, editor.height()));
+                    $div.css('height', calcYIn(value, editor.height()));
                     break;
             }
         }
@@ -90,20 +129,15 @@ function generateApp(app, editor)
     $div.css("position", "relative");
     $editor.append($div);
     $div.css("position", "absolute");
-    console.log("orignal: "+(app['min_width']));
-    console.log("resized: "+(app['min_width'] * editor.ratio()));
-
     $( "#"+app['app_name'] ).draggable({containment: "parent"}).resizable({
         minWidth: calcXIn(app['min_width'], editor.width()),
         maxWidth: calcXIn(app['max_width'],  editor.width()),
-        minHeight: calcYin(app['min_height'], editor.height()),
-        maxHeight: calcYin(app['max_height'], editor.height()),
+        minHeight: calcYIn(app['min_height'], editor.height()),
+        maxHeight: calcYIn(app['max_height'], editor.height()),
         cancel: ".cancel", 
         aspectRatio: true
     });
     var app_name = app[app_name];
-    var editorApp = {name: app['app_name'], div: $div[0]};
-    return(editorApp)
 }
 /*
 * calculates an app's x-axis property to fit within editor or resized for editor
@@ -111,7 +145,7 @@ function generateApp(app, editor)
 */
 function calcXIn(app, editor)
 {
-    return((app*editor)/1920);
+    return(Math.floor((app*editor)/1920));
 }
 /*
 * calculates an app's y-axis property to fit within editor or resized for editor
@@ -119,7 +153,7 @@ function calcXIn(app, editor)
 */
 function calcYIn(app, editor)
 {
-    return((app*editor)/1080);
+    return(Math.floor((app*editor)/1080));
 }
 /*
 * calculates an app's x-axis property to fit within editor or resized for editor
@@ -127,14 +161,14 @@ function calcYIn(app, editor)
 */
 function calcXOut(app, editor)
 {
-    return((app*1920)/editor)
+    return(Math.floor((app*1920)/editor));
 }
 /*
 * calculates an app's y-axis property to fit within editor or resized for editor
 * as the app's inforamtion is being posted to the server. 
 */
-function calcYout(app, editor)
+function calcYOut(app, editor)
 {
-    return((app*1080)/editor);
+    return(Math.floor((app*1080)/editor));
 }
 });	
