@@ -104,9 +104,11 @@ function generateApp(app, editor)
             }
         }
     })
+
     $div.css("position", "relative");
     $editor.append($div);
     $div.css("position", "absolute");
+
     $( "#"+app['app_name'] ).draggable({
         containment: "parent",
         stop: function( e, ui ) {
@@ -141,7 +143,10 @@ function generateApp(app, editor)
         }
         
     });
-    
+    if(app['app_name'] === 'Shuttle')
+    {
+        $div.html('<iframe src="http://shuttle.champlain.edu/index/embedshuttle" height="'+$div.height()+'" width="'+$div.width()+'"></iframe>')
+    }
     
 }
 });	
