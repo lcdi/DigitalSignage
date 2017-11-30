@@ -9,8 +9,6 @@
 *  ->Allows to change background and resize background
 *  ->Shows off widgets
 */
-
-//RESIZE IS BROKEN
 $(document).ready(()=>{
     var $modal = $('#message');
     var $apps = $('.draggable');
@@ -20,10 +18,9 @@ $(document).ready(()=>{
         ratio: ()=>{return (9/16)},
         width: ()=>{return $editor.width()},
         height: ()=>{
-            //console.log(editor.ratio() * editor.width())
             return(editor.ratio() * editor.width())
         },
-        resize: (height)=>{
+        onResize: (height)=>{
             $editor.height(editor.height());
             for(i = 0; i < editor.apps.length; i++)
             {
@@ -32,16 +29,13 @@ $(document).ready(()=>{
                     'width': calcXIn(editor.apps[i].width, editor.width()),
                     'top': calcYIn(editor.apps[i].from_top, editor.height()),
                     'height': calcYIn(editor.apps[i].height, editor.height())
-                }).resizable({
+                }).resizable("option", {
                     minWidth: calcXIn(editor.apps[i].min_width, editor.width()),
                     maxWidth: calcXIn(editor.apps[i].max_width,  editor.width()),
                     minHeight: calcYIn(editor.apps[i].min_height, editor.height()),
                     maxHeight: calcYIn(editor.apps[i].max_height, editor.height()),
-                    cancel: ".cancel", 
-                    aspectRatio: true
                 });
             }
-            
         },
         startup: ()=>{
             $editor.height(editor.height());
@@ -51,37 +45,19 @@ $(document).ready(()=>{
             {
                 generateApp(editor.apps[i], editor);
             }
-            $('.draggable').draggable({
-                containment: "parent",
-                stop: function( e, ui ) {
-                    for(i = 0; i < editor.apps.length; i++)
-                    {
-                        if(ui.helper[0].id === editor.apps[i].app_name)
-                        {
-                            editor.apps[i].from_top = calcYOut(ui.position.top, editor.height());
-                            editor.apps[i].from_left = calcXOut(ui.position.left, editor.width());
-                        }
-                    }
-                },
-            }).resizable({
-                aspectRatio: true,
-                cancel: ".cancel",
-                stop: (e, ui)=>{
-                    for(i = 0; i < editor.apps.length; i++)
-                    {
-                        if(ui.helper[0].id === editor.apps[i].app_name)
-                        {
-                            editor.apps[i].height = calcYOut(ui.size.height, editor.height());
-                            editor.apps[i].width = calcXOut(ui.size.width, editor.width());
-                        }
-                    }
-                }});
         }
     }
+    winWidth=$(window).innerWidth();
+    winHeight=$(window).innerHeight();
     editor.startup();
-    //editor.resize();
     $(window).on('resize', ()=>{
-        editor.resize($editor.height())
+        console.log(winWidth + " " + winHeight + "\n" + $(window).innerWidth() + " " + $(window).innerHeight() + "\n");
+        if(!(winWidth===$(window).innerWidth() && winHeight===$(window).innerHeight()))
+        {
+            editor.onResize($editor.height())
+            winWidth=$(window).innerWidth();
+            winHeight=$(window).innerHeight();
+        }
     });
 function requestAppDetails()
 {
@@ -131,16 +107,44 @@ function generateApp(app, editor)
     $div.css("position", "relative");
     $editor.append($div);
     $div.css("position", "absolute");
-    $( "#"+app['app_name'] ).draggable({containment: "parent"}).resizable({
+    $( "#"+app['app_name'] ).draggable({
+        containment: "parent",
+        stop: function( e, ui ) {
+            for(i = 0; i < editor.apps.length; i++)
+            {
+                if(ui.helper[0].id === editor.apps[i].app_name)
+                {
+                    editor.apps[i].from_top = calcYOut(ui.position.top, editor.height());
+                    editor.apps[i].from_left = calcXOut(ui.position.left, editor.width());
+                }
+            }
+        }
+    });
+    $( '.draggable' ).resizable({
         minWidth: calcXIn(app['min_width'], editor.width()),
         maxWidth: calcXIn(app['max_width'],  editor.width()),
         minHeight: calcYIn(app['min_height'], editor.height()),
         maxHeight: calcYIn(app['max_height'], editor.height()),
-        cancel: ".cancel", 
-        aspectRatio: true
+        aspectRatio: true,
+        start: (e, ui)=>{
+            console.log("resizing started");
+        },
+        stop: (e, ui)=>{
+            for(i = 0; i < editor.apps.length; i++)
+            {
+                if(ui.helper[0].id === editor.apps[i].app_name)
+                {
+                    editor.apps[i].height = calcYOut(ui.size.height, editor.height());
+                    editor.apps[i].width = calcXOut(ui.size.width, editor.width());
+                }
+            }
+        }
+        
     });
-    var app_name = app[app_name];
+    
+    
 }
+});	
 /*
 * calculates an app's x-axis property to fit within editor or resized for editor
 * as the app is been intergrated in the editor. 
@@ -173,4 +177,3 @@ function calcYOut(app, editor)
 {
     return(Math.floor((app*1080)/editor));
 }
-});	
