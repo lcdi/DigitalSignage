@@ -1,6 +1,5 @@
 <?php
 //logindex.php
-$connect = mysqli_connect("192.168.10.140", "interns", "lcdirocks", "digital_signage");
 $query = "SELECT * FROM student ORDER BY id DESC";
 $result = mysqli_query($connect, $query);
  ?>
